@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.safety51.bootstrap.cloud.service.CloudServiceAutoConfiguration
