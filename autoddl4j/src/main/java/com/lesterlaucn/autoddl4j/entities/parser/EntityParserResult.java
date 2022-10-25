@@ -1,5 +1,7 @@
 package com.lesterlaucn.autoddl4j.entities.parser;
 
+import com.lesterlaucn.autoddl4j.database.IndexType;
+import com.lesterlaucn.autoddl4j.database.TableEngine;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,12 +23,16 @@ public class EntityParserResult {
     @Data
     public static class Table {
         private String tableNameInLowerCamel;
+
         private String tableNameInSnake;
+
         private String comment;
 
         private List<Column> columns;
 
         private List<Index> indices;
+
+        private TableEngine engine;
     }
 
     @Data
@@ -45,6 +51,11 @@ public class EntityParserResult {
          * 备注
          */
         private String comment = "";
+
+        /**
+         * 默认值
+         */
+        private String defaultValue = "";
 
         /**
          * 是否唯一
@@ -68,6 +79,11 @@ public class EntityParserResult {
      */
     @Data
     public static class Index {
+
         private String indexName;
+
+        private List<Column> columns;
+
+        private IndexType indexType;
     }
 }

@@ -17,7 +17,7 @@ class EntityParserTest {
     @BeforeEach
     void setup() {
         entityParser = new EntityParser();
-        entityParser.packageRegister("com.lesterlaucn.mybatis.migration.demo.entity");
+        entityParser.packageRegister("com.lesterlaucn.autoddl4j.demo.entity");
     }
 
     @Test

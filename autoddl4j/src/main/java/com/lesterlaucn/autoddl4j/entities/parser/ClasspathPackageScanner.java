@@ -31,7 +31,6 @@ public class ClasspathPackageScanner {
     public ClasspathPackageScanner(String basePackage) {
         this.basePackage = basePackage;
         this.cl = getClass().getClassLoader();
-
     }
 
     /**
@@ -75,14 +74,14 @@ public class ClasspathPackageScanner {
 
         // get file path
         URL url = cl.getResource(splashPath);
-        String filePath = this.getRootPath(url);
+        String filePath = StringUtil.getRootPath(url);
 
         // Get classes in that package.
         // If the web server unzips the jar file, then the classes will exist in the form of
         // normal file in the directory.
         // If the web server does not unzip the jar file, then classes will exist in jar file.
         List<String> names = null; // contains the name of the class file. e.g., Apple.class will be stored as "Apple"
-        if (isJarFile(filePath)) {
+        if (StringUtil.isJarFile(filePath)) {
             // jar file
             if (log.isDebugEnabled()) {
                 log.debug("{} 是一个JAR包", filePath);
@@ -95,11 +94,11 @@ public class ClasspathPackageScanner {
                 log.debug("{} 是一个目录", filePath);
             }
 
-            names = readFromDirectory(filePath);
+            names = StringUtil.readFromDirectory(filePath);
         }
 
         for (String name : names) {
-            if (isClassFile(name)) {
+            if (StringUtil.isClassFile(name)) {
                 //nameList.add(basePackage + "." + StringUtil.trimExtension(name));
                 nameList.add(toFullyQualifiedName(name, basePackage));
             } else {
@@ -126,7 +125,7 @@ public class ClasspathPackageScanner {
     private String toFullyQualifiedName(String shortName, String basePackage) {
         StringBuilder sb = new StringBuilder(basePackage);
         sb.append('.');
-        sb.append(trimExtension(shortName));
+        sb.append(StringUtil.trimExtension(shortName));
 
         return sb.toString();
     }
@@ -142,7 +141,7 @@ public class ClasspathPackageScanner {
         List<String> nameList = new ArrayList<>();
         while (null != entry) {
             String name = entry.getName();
-            if (name.startsWith(splashedPackageName) && isClassFile(name)) {
+            if (name.startsWith(splashedPackageName) && StringUtil.isClassFile(name)) {
                 nameList.add(name);
             }
 
@@ -152,62 +151,4 @@ public class ClasspathPackageScanner {
         return nameList;
     }
 
-    private List<String> readFromDirectory(String path) {
-        File file = new File(path);
-        String[] names = file.list();
-
-        if (null == names) {
-            return null;
-        }
-
-        return Arrays.asList(names);
-    }
-
-    private boolean isClassFile(String name) {
-        return name.endsWith(".class");
-    }
-
-    private boolean isJarFile(String name) {
-        return name.endsWith(".jar");
-    }
-
-    private String getRootPath(URL url) {
-        String fileUrl = url.getFile();
-        int pos = fileUrl.indexOf('!');
-
-        if (-1 == pos) {
-            return fileUrl;
-        }
-
-        return fileUrl.substring(5, pos);
-    }
-
-    /**
-     * "cn.fh.lightning" -> "cn/fh/lightning"
-     *
-     * @param name
-     * @return
-     */
-    public String dotToSplash(String name) {
-        return name.replaceAll("\\.", "/");
-    }
-
-    /**
-     * "Apple.class" -> "Apple"
-     */
-    private String trimExtension(String name) {
-        int pos = name.indexOf('.');
-        if (-1 != pos) {
-            return name.substring(0, pos);
-        }
-
-        return name;
-    }
-
-    private String trimURI(String uri) {
-        String trimmed = uri.substring(1);
-        int splashIndex = trimmed.indexOf('/');
-
-        return trimmed.substring(splashIndex);
-    }
 }
