@@ -8,7 +8,7 @@
         <version>7</version>
     </parent>
     <groupId>com.lesterlaucn</groupId>
-    <artifactId>mybatis-migration-parent</artifactId>
+    <artifactId>autoddl4j-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0.RELEASE</version>
     <properties>
@@ -16,8 +16,8 @@
     </properties>
 
     <modules>
-        <module>mybatis-migration</module>
-        <module>mybatis-migration-spring-boot-starter</module>
+        <module>autoddl4j</module>
+        <module>autoddl4j-spring-boot-starter</module>
     </modules>
 
 </project>
