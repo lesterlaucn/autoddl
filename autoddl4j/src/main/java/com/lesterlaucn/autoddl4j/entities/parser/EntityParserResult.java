@@ -1,6 +1,6 @@
 package com.lesterlaucn.autoddl4j.entities.parser;
 
-import com.lesterlaucn.autoddl4j.database.IndexType;
+import com.lesterlaucn.autoddl4j.database.IndexMethod;
 import com.lesterlaucn.autoddl4j.database.TableEngine;
 import lombok.Data;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class EntityParserResult {
         private String tableNameInLowerCamel;
 
         private String tableNameInSnake;
-
+        
         private String comment;
 
         private List<Column> columns;
@@ -38,6 +38,11 @@ public class EntityParserResult {
     @Data
     @Accessors(chain = true)
     public static class Column {
+
+        /**
+         * 是否是主键
+         */
+        private Boolean isPrimaryKey;
 
         private Class<?> javaType;
 
@@ -80,10 +85,21 @@ public class EntityParserResult {
     @Data
     public static class Index {
 
+        /**
+         * 索引名称
+         */
         private String indexName;
 
+        /**
+         * 索引字段（有序）
+         */
         private List<Column> columns;
 
-        private IndexType indexType;
+        /**
+         * 索引方法
+         */
+        private IndexMethod indexMethod;
+
+        private String comment;
     }
 }

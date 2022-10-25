@@ -5,5 +5,5 @@ package com.lesterlaucn.autoddl4j.database;
  *
  * @author liuyuancheng
  */
-public interface IndexType {
+public interface IndexMethod {
 }
