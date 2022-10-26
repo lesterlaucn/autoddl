@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.lesterlaucn.autoddl4j.entities.parser.util.ClasspathPackageScanner;
 import com.lesterlaucn.autoddl4j.entities.parser.util.ColumnParser;
+import com.lesterlaucn.autoddl4j.entities.parser.util.TableParser;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.ReflectionUtils;
 import org.reflections.util.ConfigurationBuilder;
@@ -76,8 +77,8 @@ public class EntityParser {
      * @param type
      * @return
      */
-    public EntityParserResult parserTableType(Class<?> type) {
-        EntityParserResult result = new EntityParserResult();
+    public EntityParserResult parserTableType(Class<?> type,EntityParserResult result) {
+        TableParser.parse(type,result.getTable(type));
         ColumnParser.parse(type, result.getTable(type));
         return result;
     }

@@ -2,10 +2,9 @@ package com.lesterlaucn.autoddl4j.entities.parser;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.lesterlaucn.autoddl4j.database.IndexMethod;
-import com.lesterlaucn.autoddl4j.database.TableEngine;
+import com.lesterlaucn.autoddl4j.database.definition.IndexMethod;
+import com.lesterlaucn.autoddl4j.database.definition.TableEngine;
 import com.lesterlaucn.autoddl4j.entities.parser.util.JsonUtil;
-import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,9 +36,9 @@ public class EntityParserResult implements Serializable{
     @Accessors(chain = true)
     public static class Table implements Serializable{
 
-        private String tableNameInLowerCamel;
+        private String tableName;
 
-        private String tableNameInSnake;
+        private String tableNameOriginal;
 
         private String comment;
 
@@ -80,7 +79,7 @@ public class EntityParserResult implements Serializable{
         /**
          * 默认值
          */
-        private String defaultValue = "";
+        private String defaultValue;
 
         /**
          * 是否唯一

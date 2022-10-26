@@ -33,7 +33,8 @@ class EntityParserTest {
 
     @Test
     void parserTableType() {
-        final EntityParserResult parserResult = entityParser.parserTableType(Javax2Swagger2Simple.class);
+        EntityParserResult result = new EntityParserResult();
+        final EntityParserResult parserResult = entityParser.parserTableType(Javax2Swagger2Simple.class,result);
         System.out.println(parserResult);
     }
 }
