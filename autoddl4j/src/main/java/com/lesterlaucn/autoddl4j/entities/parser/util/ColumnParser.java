@@ -7,14 +7,14 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
-import org.reflections.ReflectionUtils;
 
+import javax.validation.constraints.NotNull;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * @author liuyuancheng
@@ -24,7 +24,7 @@ public class ColumnParser {
 
     private Class<?> type;
 
-    private Set<Field> fields;
+    private List<Field> fields;
 
     private EntityParserResult.Table table;
 
@@ -33,14 +33,17 @@ public class ColumnParser {
     }
 
     private void execute() {
-        this.fields = ReflectionUtils.getFields(type);
-        for (Field field : this.fields) {
+        this.fields = Arrays.asList(type.getFields());
+        for (int i = 0; i < this.fields.size(); i++) {
+            Field field = this.fields.get(i);
             final EntityParserResult.Column columnDef = new EntityParserResult.Column()
                     .setJavaType(field.getType())
                     .setColumnOriginal(field.getName())
                     .setColumnName(parseColumnName(field))
                     .setUnique(parseUnique(field))
                     .setLength(parseLength(field))
+                    .setOrdinalPosition(i + 1)
+                    .setIsNullable(parseIsNullable(field))
                     .setDefaultValue(parseDefaultValue(field))
                     .setIsPrimaryKey(parseIsPrimaryKey(field))
                     .setDecimalScale(parseDecimalScale(field))
@@ -48,6 +51,26 @@ public class ColumnParser {
                     .setComment(parseComment(field));
             table.addColumn(columnDef);
         }
+    }
+
+    private Boolean parseIsNullable(Field field) {
+        Boolean isNullable = null;
+        if (Objects.nonNull(field.getAnnotation(javax.persistence.Column.class))) {
+            isNullable = field.getAnnotation(javax.persistence.Column.class).nullable();
+        }
+        if (Objects.isNull(isNullable) && Objects.nonNull(field.getAnnotation(jakarta.persistence.Column.class))) {
+            isNullable = field.getAnnotation(jakarta.persistence.Column.class).nullable();
+        }
+        if (Objects.isNull(isNullable) && Objects.nonNull(field.getAnnotation(NotNull.class))) {
+            isNullable = true;
+        }
+        if (Objects.isNull(isNullable) && Objects.nonNull(field.getAnnotation(jakarta.validation.constraints.NotNull.class))) {
+            isNullable = true;
+        }
+        if (Objects.nonNull(isNullable)) {
+            return isNullable;
+        }
+        return true;
     }
 
     private String parseColumnName(Field field) {
@@ -162,10 +185,10 @@ public class ColumnParser {
         if (StringUtils.isEmpty(comment) && Objects.nonNull(field.getAnnotation(ApiModelProperty.class))) {
             comment = field.getAnnotation(ApiModelProperty.class).name();
         }
-        if (StringUtils.isEmpty(comment) &&Objects.nonNull(field.getAnnotation(javax.persistence.Column.class))) {
+        if (StringUtils.isEmpty(comment) && Objects.nonNull(field.getAnnotation(javax.persistence.Column.class))) {
             comment = field.getAnnotation(javax.persistence.Column.class).columnDefinition();
         }
-        if (StringUtils.isNotEmpty(comment)){
+        if (StringUtils.isNotEmpty(comment)) {
             return comment;
         }
         return "";

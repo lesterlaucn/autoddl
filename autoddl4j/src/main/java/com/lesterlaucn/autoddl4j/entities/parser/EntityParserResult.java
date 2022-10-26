@@ -71,6 +71,10 @@ public class EntityParserResult implements Serializable{
 
         private Integer length = 255;
 
+        private Integer ordinalPosition;
+
+        private Boolean isNullable;
+
         /**
          * 备注
          */
