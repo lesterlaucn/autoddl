@@ -79,6 +79,6 @@ public class EntityParser {
     public EntityParserResult parserTableType(Class<?> type) {
         EntityParserResult result = new EntityParserResult();
         ColumnParser.parse(type, result.getTable(type));
-        return null;
+        return result;
     }
 }

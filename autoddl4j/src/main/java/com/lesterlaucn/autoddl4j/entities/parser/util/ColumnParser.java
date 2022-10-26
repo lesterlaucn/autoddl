@@ -6,6 +6,7 @@ import com.lesterlaucn.autoddl4j.entities.parser.EntityParserResult;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.reflections.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -31,20 +32,29 @@ public class ColumnParser {
     private void execute() {
         this.fields = ReflectionUtils.getFields(type);
         for (Field field : this.fields) {
-            final EntityParserResult.Column columnDef = EntityParserResult.Column.builder()
-                    .javaType(field.getType())
-                    .columnNameInLowerCamel(field.getName())
-                    .columnNameInSnake(CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName()))
-                    .unique(parseUnique(field))
-                    .length(parseLength(field))
-                    .defaultValue(parseDefaultValue(field))
-                    .isPrimaryKey(parseIsPrimaryKey(field))
-                    .decimalScale(parseDecimalScale(field))
-                    .decimalPrecision(parseDecimalPrecision(field))
-                    .comment(parseComment(field))
-                    .build();
+            final EntityParserResult.Column columnDef = new EntityParserResult.Column()
+                    .setJavaType(field.getType())
+                    .setColumnOriginal(field.getName())
+                    .setColumnName(parseColumnName(field))
+                    .setUnique(parseUnique(field))
+                    .setLength(parseLength(field))
+                    .setDefaultValue(parseDefaultValue(field))
+                    .setIsPrimaryKey(parseIsPrimaryKey(field))
+                    .setDecimalScale(parseDecimalScale(field))
+                    .setDecimalPrecision(parseDecimalPrecision(field))
+                    .setComment(parseComment(field));
             table.addColumn(columnDef);
         }
+    }
+
+    private String parseColumnName(Field field) {
+        if (Objects.nonNull(field.getAnnotation(javax.persistence.Column.class))) {
+            return field.getAnnotation(javax.persistence.Column.class).name();
+        }
+        if (Objects.nonNull(field.getAnnotation(jakarta.persistence.Column.class))) {
+            return field.getAnnotation(jakarta.persistence.Column.class).name();
+        }
+        return StringUtils.wrap(CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName()),'`');
     }
 
     private Integer parseDecimalPrecision(Field field) {

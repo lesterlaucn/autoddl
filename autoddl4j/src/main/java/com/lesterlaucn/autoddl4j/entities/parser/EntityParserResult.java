@@ -1,12 +1,17 @@
 package com.lesterlaucn.autoddl4j.entities.parser;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.lesterlaucn.autoddl4j.database.IndexMethod;
 import com.lesterlaucn.autoddl4j.database.TableEngine;
+import com.lesterlaucn.autoddl4j.entities.parser.util.JsonUtil;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +20,11 @@ import java.util.Map;
  *
  * @author liuyuancheng
  */
-public class EntityParserResult {
+public class EntityParserResult implements Serializable{
 
     @Getter
     @Setter
-    private Map<Class<?>, Table> tables;
+    private Map<Class<?>, Table> tables = Maps.newHashMap();
 
     public synchronized Table getTable(Class<?> type){
         if (!tables.containsKey(type)){
@@ -29,14 +34,16 @@ public class EntityParserResult {
     }
 
     @Data
-    public static class Table {
+    @Accessors(chain = true)
+    public static class Table implements Serializable{
+
         private String tableNameInLowerCamel;
 
         private String tableNameInSnake;
 
         private String comment;
 
-        private List<Column> columns;
+        private List<Column> columns = Lists.newArrayList();
 
         private List<Index> indices;
 
@@ -48,8 +55,9 @@ public class EntityParserResult {
         }
     }
 
-    @Builder
-    public static class Column {
+    @Data
+    @Accessors(chain = true)
+    public static class Column implements Serializable{
 
         /**
          * 是否是主键
@@ -58,9 +66,9 @@ public class EntityParserResult {
 
         private Class<?> javaType;
 
-        private String columnNameInLowerCamel;
+        private String columnOriginal;
 
-        private String columnNameInSnake;
+        private String columnName;
 
         private Integer length = 255;
 
@@ -94,8 +102,9 @@ public class EntityParserResult {
     /**
      * 索引
      */
-    @Builder
-    public static class Index {
+    @Data
+    @Accessors(chain = true)
+    public static class Index implements Serializable {
 
         /**
          * 索引名称
@@ -113,5 +122,10 @@ public class EntityParserResult {
         private IndexMethod indexMethod;
 
         private String comment;
+    }
+
+    @Override
+    public String toString() {
+        return JsonUtil.toJsonStr(this);
     }
 }
