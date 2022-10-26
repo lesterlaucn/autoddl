@@ -1,6 +1,7 @@
 package com.lesterlaucn.autoddl4j.annotations;
 
 import com.lesterlaucn.autoddl4j.database.definition.CharacterSet;
+import com.lesterlaucn.autoddl4j.database.definition.DataBaseType;
 import com.lesterlaucn.autoddl4j.database.definition.TableEngine;
 
 import java.lang.annotation.Retention;
@@ -17,6 +18,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(TYPE)
 @Retention(RUNTIME)
 public @interface TableExtend {
+
+    DataBaseType dbType() default DataBaseType.MySQL;
 
     String comment() default "";
 

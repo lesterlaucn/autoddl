@@ -29,7 +29,7 @@ public class Javax2Swagger2Simple {
     private Boolean isTrue;
 
     @Column
-    private Integer age;
+    private int age;
 
     @Column
     private BigDecimal price;

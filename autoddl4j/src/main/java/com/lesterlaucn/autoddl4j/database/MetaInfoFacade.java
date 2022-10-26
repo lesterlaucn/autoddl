@@ -5,11 +5,11 @@ package com.lesterlaucn.autoddl4j.database;
  *
  * @author liuyuancheng
  */
-public class DatabaseMetaInfoFacade {
+public class MetaInfoFacade {
 
-    private DatabaseMetaInfoFacade(){}
+    private MetaInfoFacade(){}
 
-    public DatabaseMetaInfoFacade create(){
+    public MetaInfoFacade create(){
         return this;
     }
 }
