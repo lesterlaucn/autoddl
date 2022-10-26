@@ -1,13 +1,11 @@
-package com.lesterlaucn.autoddl4j.entities.parser;
+package com.lesterlaucn.autoddl4j.entities.parser.util;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;

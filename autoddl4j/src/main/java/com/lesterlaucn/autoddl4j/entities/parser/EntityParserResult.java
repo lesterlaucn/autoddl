@@ -2,12 +2,13 @@ package com.lesterlaucn.autoddl4j.entities.parser;
 
 import com.lesterlaucn.autoddl4j.database.IndexMethod;
 import com.lesterlaucn.autoddl4j.database.TableEngine;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by liuyuancheng on 2022/10/25  <br/>
@@ -18,14 +19,21 @@ public class EntityParserResult {
 
     @Getter
     @Setter
-    private List<Table> tables;
+    private Map<Class<?>, Table> tables;
+
+    public synchronized Table getTable(Class<?> type){
+        if (!tables.containsKey(type)){
+            this.tables.put(type,new Table());
+        }
+        return this.getTables().get(type);
+    }
 
     @Data
     public static class Table {
         private String tableNameInLowerCamel;
 
         private String tableNameInSnake;
-        
+
         private String comment;
 
         private List<Column> columns;
@@ -33,10 +41,14 @@ public class EntityParserResult {
         private List<Index> indices;
 
         private TableEngine engine;
+
+        public Table addColumn(Column columnDef){
+            this.columns.add(columnDef);
+            return this;
+        }
     }
 
-    @Data
-    @Accessors(chain = true)
+    @Builder
     public static class Column {
 
         /**
@@ -82,7 +94,7 @@ public class EntityParserResult {
     /**
      * 索引
      */
-    @Data
+    @Builder
     public static class Index {
 
         /**

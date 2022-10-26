@@ -1,6 +1,6 @@
-package com.lesterlaucn.autoddl4j.entities.parser;
+package com.lesterlaucn.autoddl4j.entities.parser.util;
 
-import com.lesterlaucn.autoddl4j.EntityParserException;
+import com.lesterlaucn.autoddl4j.exception.EntityParserException;
 
 import java.lang.reflect.Array;
 import java.util.Objects;

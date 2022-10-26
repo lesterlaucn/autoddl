@@ -2,8 +2,13 @@ package com.lesterlaucn.autoddl4j.entities.parser;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.lesterlaucn.autoddl4j.entities.parser.util.ClasspathPackageScanner;
+import com.lesterlaucn.autoddl4j.entities.parser.util.ColumnParser;
 import lombok.extern.slf4j.Slf4j;
+import org.reflections.ReflectionUtils;
+import org.reflections.util.ConfigurationBuilder;
 
+import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -32,7 +37,8 @@ public class EntityParser {
         }
     }
 
-    public Set<String> getAllClasses() {
+    private Set<String> getAllClasses() {
+        ConfigurationBuilder.build().forPackages();
         Set<String> classesSet = Sets.newConcurrentHashSet();
         for (Map.Entry<String, ClasspathPackageScanner> scannerEntry : PACKAGE_SCANNER_MAP.entrySet()) {
             classesSet.addAll(scannerEntry.getValue().getFullyQualifiedClassNameList());
@@ -42,9 +48,10 @@ public class EntityParser {
 
     /**
      * 获取类对象
+     *
      * @return
      */
-    public Set<Class<?>> getTableEntities() {
+    public Set<Class<?>> getTableTypes() {
         final Set<String> allClasses = getAllClasses();
         Set<Class<?>> returning = Sets.newConcurrentHashSet();
         try {
@@ -61,5 +68,17 @@ public class EntityParser {
             throw new RuntimeException(e);
         }
         return returning;
+    }
+
+    /**
+     * 解析Table类型
+     *
+     * @param type
+     * @return
+     */
+    public EntityParserResult parserTableType(Class<?> type) {
+        EntityParserResult result = new EntityParserResult();
+        ColumnParser.parse(type, result.getTable(type));
+        return null;
     }
 }

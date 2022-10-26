@@ -5,5 +5,6 @@ package com.lesterlaucn.autoddl4j.annotations;
  *
  * @author liuyuancheng
  */
-public @interface TableConfigForMySQL {
+public @interface TableExtend {
+
 }
