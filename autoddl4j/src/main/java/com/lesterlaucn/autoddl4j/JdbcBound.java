@@ -10,18 +10,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * @author liuyuancheng
  */
 @Getter
-public class JdbcSourceBound {
+public class JdbcBound {
     private JdbcTemplate jdbcTemplate;
     private DbType dbType;
     private String packageName;
 
-    private JdbcSourceBound(JdbcTemplate jdbcTemplate, DbType dbType, String packageName) {
+    private JdbcBound(JdbcTemplate jdbcTemplate, DbType dbType, String packageName) {
         this.jdbcTemplate = jdbcTemplate;
         this.dbType = dbType;
         this.packageName = packageName;
     }
 
-    public static JdbcSourceBound create(DbType dbType, String packageName, JdbcTemplate jdbcTemplate) {
-        return new JdbcSourceBound(jdbcTemplate, dbType, packageName);
+    public static JdbcBound create(DbType dbType, String packageName, JdbcTemplate jdbcTemplate) {
+        return new JdbcBound(jdbcTemplate, dbType, packageName);
     }
 }
