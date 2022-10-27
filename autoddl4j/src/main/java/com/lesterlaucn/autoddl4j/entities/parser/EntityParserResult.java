@@ -47,7 +47,7 @@ public class EntityParserResult implements Serializable{
 
         private String comment;
 
-        private DataBaseType dataBaseType;
+        private DbType dataBaseType;
 
         private CharacterSet characterSet;
 

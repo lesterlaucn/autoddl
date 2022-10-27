@@ -18,6 +18,7 @@
     <modules>
         <module>autoddl4j</module>
         <module>autoddl4j-spring-boot-starter</module>
+        <module>examples</module>
     </modules>
 
 </project>

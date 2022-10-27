@@ -6,7 +6,7 @@ package com.lesterlaucn.autoddl4j.database.definition;
  * @author liuyuancheng
  */
 
-public enum DataBaseType {
+public enum DbType {
     ClickHouse,
     MySQL
 }

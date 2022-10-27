@@ -4,7 +4,7 @@ import com.google.common.base.CaseFormat;
 import com.lesterlaucn.autoddl4j.annotations.TableExtend;
 import com.lesterlaucn.autoddl4j.database.definition.CharacterSet;
 import com.lesterlaucn.autoddl4j.database.definition.Collation;
-import com.lesterlaucn.autoddl4j.database.definition.DataBaseType;
+import com.lesterlaucn.autoddl4j.database.definition.DbType;
 import com.lesterlaucn.autoddl4j.database.definition.TableEngine;
 import com.lesterlaucn.autoddl4j.entities.parser.EntityParserResult;
 import lombok.Data;
@@ -59,11 +59,11 @@ public class TableParser {
         return CharacterSet.MySQL_UTF8;
     }
 
-    private DataBaseType parseDataBaseType(Class<?> type) {
+    private DbType parseDataBaseType(Class<?> type) {
         if (Objects.nonNull(type.getAnnotation(TableExtend.class))) {
             return type.getAnnotation(TableExtend.class).dbType();
         }
-        return DataBaseType.MySQL;
+        return DbType.MySQL;
     }
 
     private Collation parseCollation(Class<?> type) {

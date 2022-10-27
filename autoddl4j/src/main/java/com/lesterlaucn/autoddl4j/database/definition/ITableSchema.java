@@ -1,8 +1,9 @@
 package com.lesterlaucn.autoddl4j.database.definition;
 
+import com.google.common.collect.Maps;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.sql.DataSource;
+import java.util.Map;
 
 /**
  * Created by liuyuancheng on 2022/10/26  <br/>
@@ -11,15 +12,27 @@ import javax.sql.DataSource;
  */
 public interface ITableSchema {
 
+    Map<String, TableSchemaBound> jdbcTemplateMap = Maps.newHashMap();
+
 
     /**
-     * 数据源
+     * PackName与JdbcTemplate绑定
      *
-     * @param dataSource
+     * @param packageName
      * @return
      */
-    public default JdbcTemplate getJdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    public default JdbcTemplate getJdbcTemplate(String packageName) {
+        return jdbcTemplateMap.get(packageName).getJdbcTemplate();
+    }
+
+    /**
+     * 包及其数据源绑定
+     *
+     * @param packageName
+     * @param tableSchemaBound
+     */
+    public default void register(String packageName, TableSchemaBound tableSchemaBound) {
+        jdbcTemplateMap.put(packageName, tableSchemaBound);
     }
 
     /**
