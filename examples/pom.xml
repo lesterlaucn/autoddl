@@ -18,6 +18,6 @@
     </properties>
     <packaging>pom</packaging>
     <modules>
-        <module>mybatis_plus</module>
+        <module>mybatis_plus_example</module>
     </modules>
 </project>
