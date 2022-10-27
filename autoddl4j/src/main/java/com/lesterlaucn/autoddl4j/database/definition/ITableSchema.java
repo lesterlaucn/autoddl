@@ -1,6 +1,7 @@
 package com.lesterlaucn.autoddl4j.database.definition;
 
 import com.google.common.collect.Maps;
+import com.lesterlaucn.autoddl4j.JdbcSourceBound;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.Map;
  */
 public interface ITableSchema {
 
-    Map<String, TableSchemaBound> jdbcTemplateMap = Maps.newHashMap();
+    Map<String, JdbcSourceBound> jdbcTemplateMap = Maps.newHashMap();
 
 
     /**
@@ -31,7 +32,7 @@ public interface ITableSchema {
      * @param packageName
      * @param tableSchemaBound
      */
-    public default void register(String packageName, TableSchemaBound tableSchemaBound) {
+    public default void register(String packageName, JdbcSourceBound tableSchemaBound) {
         jdbcTemplateMap.put(packageName, tableSchemaBound);
     }
 
