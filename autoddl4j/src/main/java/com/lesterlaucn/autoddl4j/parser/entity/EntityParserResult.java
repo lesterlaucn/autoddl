@@ -5,8 +5,6 @@ import com.google.common.collect.Maps;
 import com.lesterlaucn.autoddl4j.datasource.definition.*;
 import com.lesterlaucn.autoddl4j.parser.entity.util.JsonUtil;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -18,26 +16,24 @@ import java.util.Map;
  *
  * @author liuyuancheng
  */
-public class EntityParserResult implements Serializable{
+public class EntityParserResult implements Serializable {
 
-    public static EntityParserResult create(){
+    public static EntityParserResult create() {
         return new EntityParserResult();
     }
 
-    @Getter
-    @Setter
     private Map<Class<?>, Table> tables = Maps.newHashMap();
 
-    public synchronized Table getTable(Class<?> type){
-        if (!tables.containsKey(type)){
-            this.tables.put(type,new Table());
+    public synchronized Table getTable(Class<?> type) {
+        if (!tables.containsKey(type)) {
+            this.tables.put(type, new Table());
         }
-        return this.getTables().get(type);
+        return this.tables.get(type);
     }
 
     @Data
     @Accessors(chain = true)
-    public static class Table implements Serializable{
+    public static class Table implements Serializable {
 
         private String tableName;
 
@@ -59,7 +55,7 @@ public class EntityParserResult implements Serializable{
 
         private TableEngine engine;
 
-        public Table addColumn(Column columnDef){
+        public Table addColumn(Column columnDef) {
             this.columns.add(columnDef);
             return this;
         }
@@ -67,7 +63,7 @@ public class EntityParserResult implements Serializable{
 
     @Data
     @Accessors(chain = true)
-    public static class Column implements Serializable{
+    public static class Column implements Serializable {
 
         /**
          * 是否是主键
