@@ -2,7 +2,6 @@ package com.lesterlaucn.autoddl4j.entities.parser;
 
 import com.lesterlaucn.autoddl4j.demo.entity.Javax2Swagger2Simple;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ class EntityParserTest {
     @Test
     void getTableTypes() {
         final Set<Class<?>> tableEntities = entityParser.getTableTypes();
-        log.warn("存在@Table注解的类型：{}",tableEntities);
+        log.warn("存在@Table注解的类型：{}", tableEntities);
     }
 
     @Test
@@ -32,9 +31,10 @@ class EntityParserTest {
     }
 
     @Test
-    void parserTableType() {
-        EntityParserResult result = new EntityParserResult();
-        final EntityParserResult parserResult = entityParser.parserTableType(Javax2Swagger2Simple.class,result);
+    void parserTableEntity() {
+        final EntityParserResult parserResult = entityParser.parserTableEntity(
+                EntityParserResult.create(),
+                Javax2Swagger2Simple.class);
         System.out.println(parserResult);
     }
 }

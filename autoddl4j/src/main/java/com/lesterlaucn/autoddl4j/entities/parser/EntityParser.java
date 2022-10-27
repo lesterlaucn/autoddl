@@ -6,10 +6,8 @@ import com.lesterlaucn.autoddl4j.entities.parser.util.ClasspathPackageScanner;
 import com.lesterlaucn.autoddl4j.entities.parser.util.ColumnParser;
 import com.lesterlaucn.autoddl4j.entities.parser.util.TableParser;
 import lombok.extern.slf4j.Slf4j;
-import org.reflections.ReflectionUtils;
 import org.reflections.util.ConfigurationBuilder;
 
-import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -74,12 +72,15 @@ public class EntityParser {
     /**
      * 解析Table类型
      *
-     * @param type
+     * @param result   EntityParserResult.create()
+     * @param entities 需要解析的
      * @return
      */
-    public EntityParserResult parserTableType(Class<?> type,EntityParserResult result) {
-        TableParser.parse(type,result.getTable(type));
-        ColumnParser.parse(type, result.getTable(type));
+    public EntityParserResult parserTableEntity(EntityParserResult result, Class<?>... entities) {
+        for (Class<?> entity : entities) {
+            TableParser.parse(entity, result.getTable(entity));
+            ColumnParser.parse(entity, result.getTable(entity));
+        }
         return result;
     }
 }

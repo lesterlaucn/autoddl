@@ -33,7 +33,7 @@ public class ColumnParser {
     }
 
     private void execute() {
-        this.fields = Arrays.asList(type.getFields());
+        this.fields = Arrays.asList(type.getDeclaredFields());
         for (int i = 0; i < this.fields.size(); i++) {
             Field field = this.fields.get(i);
             final EntityParserResult.Column columnDef = new EntityParserResult.Column()

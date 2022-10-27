@@ -7,9 +7,9 @@ import lombok.Getter;
  *
  * @author liuyuancheng
  */
-public enum CharacterSet {
-    MySQL_UTF8("utf8"),
-    MySQL_UTF8MB4("utf8mb4"),
+public enum Collation {
+    MySQL_COLLATION_UTF8("utf8_general_ci"),
+    MySQL_COLLATION_UTF8MB4("utf8mb4_general_ci")
     ;
 
     /**
@@ -18,7 +18,7 @@ public enum CharacterSet {
     @Getter
     String name;
 
-    CharacterSet(String name) {
+    Collation(String name) {
         this.name = name;
     }
 }

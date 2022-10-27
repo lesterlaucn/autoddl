@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Schema(description = "测试表1")
 @Table
-@TableExtend(comment = "测试表")
+@TableExtend(comment = "测试表",prefix = "autodd4j")
 @Data
 public class Javax2Swagger2Simple {
 

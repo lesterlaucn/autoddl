@@ -1,6 +1,7 @@
 package com.lesterlaucn.autoddl4j.annotations;
 
 import com.lesterlaucn.autoddl4j.database.definition.CharacterSet;
+import com.lesterlaucn.autoddl4j.database.definition.Collation;
 import com.lesterlaucn.autoddl4j.database.definition.DataBaseType;
 import com.lesterlaucn.autoddl4j.database.definition.TableEngine;
 
@@ -21,11 +22,19 @@ public @interface TableExtend {
 
     DataBaseType dbType() default DataBaseType.MySQL;
 
+    /**
+     * 表曾用名
+     * @return array
+     */
+    String[] formerName() default {};
+
+    String prefix() default "";
+
     String comment() default "";
 
     TableEngine engine() default TableEngine.MySQL_InnoDB;
 
     CharacterSet charset() default CharacterSet.MySQL_UTF8;
 
-    CharacterSet collation() default CharacterSet.MySQL_COLLATION_UTF8;
+    Collation collation() default Collation.MySQL_COLLATION_UTF8;
 }

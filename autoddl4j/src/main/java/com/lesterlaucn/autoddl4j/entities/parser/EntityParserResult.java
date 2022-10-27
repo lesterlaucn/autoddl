@@ -2,8 +2,7 @@ package com.lesterlaucn.autoddl4j.entities.parser;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.lesterlaucn.autoddl4j.database.definition.IndexMethod;
-import com.lesterlaucn.autoddl4j.database.definition.TableEngine;
+import com.lesterlaucn.autoddl4j.database.definition.*;
 import com.lesterlaucn.autoddl4j.entities.parser.util.JsonUtil;
 import lombok.Data;
 import lombok.Getter;
@@ -20,6 +19,10 @@ import java.util.Map;
  * @author liuyuancheng
  */
 public class EntityParserResult implements Serializable{
+
+    public static EntityParserResult create(){
+        return new EntityParserResult();
+    }
 
     @Getter
     @Setter
@@ -38,9 +41,17 @@ public class EntityParserResult implements Serializable{
 
         private String tableName;
 
+        private String[] formerName;
+
         private String tableNameOriginal;
 
         private String comment;
+
+        private DataBaseType dataBaseType;
+
+        private CharacterSet characterSet;
+
+        private Collation collation;
 
         private List<Column> columns = Lists.newArrayList();
 

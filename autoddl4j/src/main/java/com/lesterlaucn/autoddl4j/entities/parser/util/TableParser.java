@@ -2,6 +2,10 @@ package com.lesterlaucn.autoddl4j.entities.parser.util;
 
 import com.google.common.base.CaseFormat;
 import com.lesterlaucn.autoddl4j.annotations.TableExtend;
+import com.lesterlaucn.autoddl4j.database.definition.CharacterSet;
+import com.lesterlaucn.autoddl4j.database.definition.Collation;
+import com.lesterlaucn.autoddl4j.database.definition.DataBaseType;
+import com.lesterlaucn.autoddl4j.database.definition.TableEngine;
 import com.lesterlaucn.autoddl4j.entities.parser.EntityParserResult;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -22,10 +26,6 @@ public class TableParser {
 
     }
 
-    public TableParser(Class<?> entityClazz) {
-
-    }
-
     public static void parse(Class<?> type, EntityParserResult.Table table) {
         final TableParser tableParser = new TableParser();
         tableParser.setTable(table);
@@ -36,28 +36,75 @@ public class TableParser {
     private void execute() {
         this.table.setTableName(parseTableName(this.type))
                 .setTableNameOriginal(this.type.getSimpleName())
+                .setFormerName(parseFormerName(this.type))
+                .setEngine(parseTableEngine(this.type))
+                .setCollation(parseCollation(this.type))
+                .setCharacterSet(parseCharacterSet(this.type))
+                .setDataBaseType(parseDataBaseType(this.type))
                 .setComment(parseComment(this.type))
         ;
+    }
+
+    private String[] parseFormerName(Class<?> type) {
+        if (Objects.nonNull(type.getAnnotation(TableExtend.class))) {
+            return type.getAnnotation(TableExtend.class).formerName();
+        }
+        return new String[0];
+    }
+
+    private CharacterSet parseCharacterSet(Class<?> type) {
+        if (Objects.nonNull(type.getAnnotation(TableExtend.class))) {
+            return type.getAnnotation(TableExtend.class).charset();
+        }
+        return CharacterSet.MySQL_UTF8;
+    }
+
+    private DataBaseType parseDataBaseType(Class<?> type) {
+        if (Objects.nonNull(type.getAnnotation(TableExtend.class))) {
+            return type.getAnnotation(TableExtend.class).dbType();
+        }
+        return DataBaseType.MySQL;
+    }
+
+    private Collation parseCollation(Class<?> type) {
+        if (Objects.nonNull(type.getAnnotation(TableExtend.class))) {
+            return type.getAnnotation(TableExtend.class).collation();
+        }
+        return Collation.MySQL_COLLATION_UTF8;
+    }
+
+    private TableEngine parseTableEngine(Class<?> type) {
+        if (Objects.nonNull(type.getAnnotation(TableExtend.class))) {
+            return type.getAnnotation(TableExtend.class).engine();
+        }
+        return TableEngine.MySQL_InnoDB;
     }
 
     private String parseComment(Class<?> type) {
         if (Objects.nonNull(type.getAnnotation(TableExtend.class))) {
             return type.getAnnotation(TableExtend.class).comment();
         }
-        return null;
+        return "";
     }
 
     private String parseTableName(Class<?> type) {
         String tableName = "";
+        String tablePrefix = "";
         if (StringUtils.isEmpty(tableName) && Objects.nonNull(type.getAnnotation(javax.persistence.Table.class))) {
             tableName = type.getAnnotation(javax.persistence.Table.class).name();
         }
         if (StringUtils.isEmpty(tableName) && Objects.nonNull(type.getAnnotation(jakarta.persistence.Table.class))) {
             tableName = type.getAnnotation(jakarta.persistence.Table.class).name();
         }
-        if (StringUtils.isNotEmpty(tableName)){
-            return tableName;
+        if (Objects.nonNull(type.getAnnotation(TableExtend.class))) {
+            tablePrefix = type.getAnnotation(TableExtend.class).prefix();
         }
-        return CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, type.getSimpleName());
+        if (StringUtils.isEmpty(tableName)) {
+            tableName = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, type.getSimpleName());
+        }
+        if (StringUtils.isNotEmpty(tablePrefix)) {
+            tableName = tablePrefix + "_" + StringUtils.stripStart(tableName, "_");
+        }
+        return tableName;
     }
 }
