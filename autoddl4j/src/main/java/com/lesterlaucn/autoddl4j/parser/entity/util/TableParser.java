@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.entities.parser.util;
+package com.lesterlaucn.autoddl4j.parser.entity.util;
 
 import com.google.common.base.CaseFormat;
 import com.lesterlaucn.autoddl4j.annotations.TableExtend;
@@ -6,7 +6,7 @@ import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
 import com.lesterlaucn.autoddl4j.datasource.definition.Collation;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
-import com.lesterlaucn.autoddl4j.entities.parser.EntityParserResult;
+import com.lesterlaucn.autoddl4j.parser.entity.EntityParserResult;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 

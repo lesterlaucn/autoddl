@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.entities.entity2ddl;
+package com.lesterlaucn.autoddl4j.parser.ddl;
 
 import lombok.Builder;
 import lombok.Data;

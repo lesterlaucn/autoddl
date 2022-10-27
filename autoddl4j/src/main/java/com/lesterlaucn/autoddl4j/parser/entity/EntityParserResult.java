@@ -1,9 +1,9 @@
-package com.lesterlaucn.autoddl4j.entities.parser;
+package com.lesterlaucn.autoddl4j.parser.entity;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lesterlaucn.autoddl4j.datasource.definition.*;
-import com.lesterlaucn.autoddl4j.entities.parser.util.JsonUtil;
+import com.lesterlaucn.autoddl4j.parser.entity.util.JsonUtil;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

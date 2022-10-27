@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.entities.parser;
+package com.lesterlaucn.autoddl4j.parser.entity;
 
 import com.lesterlaucn.autoddl4j.demo.entity.Javax2Swagger2Simple;
 import lombok.extern.slf4j.Slf4j;

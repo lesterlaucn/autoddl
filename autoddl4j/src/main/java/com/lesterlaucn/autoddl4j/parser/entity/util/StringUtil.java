@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.entities.parser.util;
+package com.lesterlaucn.autoddl4j.parser.entity.util;
 
 import java.io.File;
 import java.net.URL;
