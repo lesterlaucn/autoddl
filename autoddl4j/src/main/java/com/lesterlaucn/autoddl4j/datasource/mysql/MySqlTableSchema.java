@@ -1,9 +1,6 @@
-package com.lesterlaucn.autoddl4j.database.mysql;
+package com.lesterlaucn.autoddl4j.datasource.mysql;
 
-import com.lesterlaucn.autoddl4j.database.definition.ITableSchema;
-import org.springframework.jdbc.core.JdbcTemplate;
-
-import javax.sql.DataSource;
+import com.lesterlaucn.autoddl4j.datasource.definition.ITableSchema;
 
 /**
  * Created by liuyuancheng on 2022/10/26  <br/>

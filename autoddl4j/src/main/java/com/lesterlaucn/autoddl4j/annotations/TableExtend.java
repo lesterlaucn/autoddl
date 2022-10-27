@@ -1,9 +1,9 @@
 package com.lesterlaucn.autoddl4j.annotations;
 
-import com.lesterlaucn.autoddl4j.database.definition.CharacterSet;
-import com.lesterlaucn.autoddl4j.database.definition.Collation;
-import com.lesterlaucn.autoddl4j.database.definition.DbType;
-import com.lesterlaucn.autoddl4j.database.definition.TableEngine;
+import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
+import com.lesterlaucn.autoddl4j.datasource.definition.Collation;
+import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
+import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

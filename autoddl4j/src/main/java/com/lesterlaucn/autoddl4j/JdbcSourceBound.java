@@ -1,6 +1,6 @@
 package com.lesterlaucn.autoddl4j;
 
-import com.lesterlaucn.autoddl4j.database.definition.DbType;
+import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import lombok.Getter;
 import org.springframework.jdbc.core.JdbcTemplate;
 

@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.database.definition;
+package com.lesterlaucn.autoddl4j.datasource.definition;
 
 import com.google.common.collect.Maps;
 import com.lesterlaucn.autoddl4j.JdbcSourceBound;

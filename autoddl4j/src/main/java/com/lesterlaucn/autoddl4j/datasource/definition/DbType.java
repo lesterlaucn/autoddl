@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.database.definition;
+package com.lesterlaucn.autoddl4j.datasource.definition;
 
 /**
  * Created by liuyuancheng on 2022/10/26  <br/>
