@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.parser.entity;
+package com.lesterlaucn.autoddl4j.parser;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -22,11 +22,18 @@ public class EntityParserResult implements Serializable {
         return new EntityParserResult();
     }
 
-    private Map<Class<?>, Table> tables = Maps.newHashMap();
+    private Map<String, Table> tables = Maps.newHashMap();
 
-    public synchronized Table getTable(Class<?> type) {
+    public synchronized Table getTable(String type) {
         if (!tables.containsKey(type)) {
             this.tables.put(type, new Table());
+        }
+        return this.tables.get(type);
+    }
+
+    public synchronized Table addTable(String type,Table table) {
+        if (!tables.containsKey(type)) {
+            this.tables.put(type, table);
         }
         return this.tables.get(type);
     }

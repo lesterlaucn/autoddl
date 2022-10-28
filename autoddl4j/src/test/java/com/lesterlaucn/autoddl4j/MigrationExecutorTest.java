@@ -31,8 +31,7 @@ class MigrationExecutorTest {
     void getJdbcTemplate() {
         final JdbcTemplate jdbcTemplate = migrationExecutor.getJdbcTemplate(TEST_ENTITY);
         final List<Map<String, Object>> tables = jdbcTemplate.queryForList("show tables");
-        System.out.println(tables);
-        final List<Map<String, Object>> parserTest = jdbcTemplate.queryForList("show create table autoddl4j_parser_test");
+        final List<Map<String, Object>> parserTest = jdbcTemplate.queryForList("show create table "+tables.get(0).get("Tables_in_autoddl4j"));
         System.out.println(parserTest);
     }
 

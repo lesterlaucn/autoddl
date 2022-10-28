@@ -6,7 +6,7 @@ import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
 import com.lesterlaucn.autoddl4j.datasource.definition.Collation;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
-import com.lesterlaucn.autoddl4j.parser.entity.EntityParserResult;
+import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 

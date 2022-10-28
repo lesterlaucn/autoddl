@@ -2,6 +2,7 @@ package com.lesterlaucn.autoddl4j.parser.entity;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
 import com.lesterlaucn.autoddl4j.parser.entity.util.ClasspathPackageScanner;
 import com.lesterlaucn.autoddl4j.parser.entity.util.ColumnParser;
 import com.lesterlaucn.autoddl4j.parser.entity.util.TableParser;
@@ -78,8 +79,8 @@ public class EntityParser {
      */
     public EntityParserResult parserTableEntity(EntityParserResult result, Class<?>... entities) {
         for (Class<?> entity : entities) {
-            TableParser.parse(entity, result.getTable(entity));
-            ColumnParser.parse(entity, result.getTable(entity));
+            TableParser.parse(entity, result.getTable(entity.getCanonicalName()));
+            ColumnParser.parse(entity, result.getTable(entity.getCanonicalName()));
         }
         return result;
     }

@@ -2,7 +2,7 @@ package com.lesterlaucn.autoddl4j.parser.entity.util;
 
 
 import com.google.common.base.CaseFormat;
-import com.lesterlaucn.autoddl4j.parser.entity.EntityParserResult;
+import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

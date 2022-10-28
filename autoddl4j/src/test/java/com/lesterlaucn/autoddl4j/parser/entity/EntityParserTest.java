@@ -1,6 +1,7 @@
 package com.lesterlaucn.autoddl4j.parser.entity;
 
 import com.lesterlaucn.autoddl4j.demo.entity.Javax2Swagger2Simple;
+import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
