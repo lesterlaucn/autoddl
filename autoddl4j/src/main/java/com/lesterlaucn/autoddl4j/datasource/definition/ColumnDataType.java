@@ -11,22 +11,26 @@ import java.time.LocalDateTime;
  * @author liuyuancheng
  */
 public enum ColumnDataType {
-    MySQL_int(Integer.class),
-    MySQL_bigint(Long.class),
-    MySQL_datetime(LocalDateTime.class),
-    MySQL_date(LocalDate.class),
-    MySQL_double(Double.class),
-    MySQL_float(Double.class),
-    MySQL_text(String.class),
-    MySQL_tinyint(Integer.class),
-    MySQL_boolean(Boolean.class),
-    MySQL_decimal(String.class),
-    MySQL_varchar(String.class);
+    MySQL_int(Integer.class,11),
+    MySQL_bigint(Long.class,20),
+    MySQL_datetime(LocalDateTime.class,11),
+    MySQL_date(LocalDate.class,11),
+    MySQL_double(Double.class,8),
+    MySQL_float(Double.class,8),
+    MySQL_text(String.class,65535),
+    MySQL_tinyint(Integer.class,4),
+    MySQL_bool(Boolean.class,1),
+    MySQL_decimal(String.class,2),
+    MySQL_varchar(String.class,255);
 
     @Getter
     Class<?> javaType;
 
-    ColumnDataType(Class<?> javaType) {
+    @Getter
+    Integer defaultLength;
+
+    ColumnDataType(Class<?> javaType,Integer defaultLength) {
         this.javaType = javaType;
+        this.defaultLength = defaultLength;
     }
 }

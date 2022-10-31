@@ -4,7 +4,7 @@ import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class MySqlDdlParserTest {
+class MySqlTableDdlParserTest {
 
 
     @BeforeEach
@@ -20,7 +20,7 @@ class MySqlDdlParserTest {
                 "  `create_time` datetime NOT NULL COMMENT '创建时间',\n" +
                 "  PRIMARY KEY (`id`)\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8";
-        final MySqlDdlParser ddlParser = new MySqlDdlParser(ddl);
+        final MySqlTableDdlParser ddlParser = new MySqlTableDdlParser(ddl);
         final EntityParserResult parse = ddlParser.parse();
         System.out.println(parse.toString());
     }
@@ -37,8 +37,8 @@ class MySqlDdlParserTest {
                 "  `disabled` tinyint(1) NOT NULL,\n" +
                 "  PRIMARY KEY (`id`,`name`) USING BTREE,\n" +
                 "  KEY `idx_idc` (`age`,`idcard`) USING BTREE\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=utf8";
-        final MySqlDdlParser ddlParser = new MySqlDdlParser(ddl);
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表注释'";
+        final MySqlTableDdlParser ddlParser = new MySqlTableDdlParser(ddl);
         final EntityParserResult parse = ddlParser.parse();
         System.out.println(parse.toString());
     }

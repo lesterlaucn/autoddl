@@ -1,13 +1,14 @@
 package com.lesterlaucn.autoddl4j.parser;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lesterlaucn.autoddl4j.datasource.definition.*;
 import com.lesterlaucn.autoddl4j.parser.entity.util.JsonUtil;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.apache.commons.collections.map.LinkedMap;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class EntityParserResult implements Serializable {
 
     private Map<String, Table> tables;
 
-    private EntityParserResult(){
+    private EntityParserResult() {
         this.tables = Maps.newHashMap();
     }
 
@@ -59,14 +60,17 @@ public class EntityParserResult implements Serializable {
 
         private Collation collation;
 
-        private List<Column> columns = Lists.newArrayList();
+        /**
+         * fieldName->ColumnDef
+         */
+        private Map<String, Column> columns = new LinkedHashMap<>();
 
         private List<Index> indices;
 
         private TableEngine engine;
 
         public Table addColumn(Column columnDef) {
-            this.columns.add(columnDef);
+            this.columns.put(columnDef.getColumnName(), columnDef);
             return this;
         }
     }
@@ -86,7 +90,7 @@ public class EntityParserResult implements Serializable {
 
         private String columnName;
 
-        private Integer length = 255;
+        private Integer length;
 
         private Integer ordinalPosition;
 
