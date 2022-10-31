@@ -4,7 +4,7 @@ import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class MySqlTableDdlParserTest {
+class MySqlITableDdlParserTest {
 
 
     @BeforeEach
@@ -29,7 +29,7 @@ class MySqlTableDdlParserTest {
     void parseDdl2() {
         String ddl = "CREATE TABLE `autoddl4j_test2` (\n" +
                 "  `id` int(11) NOT NULL,\n" +
-                "  `name` varchar(255) NOT NULL DEFAULT '',\n" +
+                "  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '姓名',\n" +
                 "  `info` text NOT NULL,\n" +
                 "  `create_time` datetime NOT NULL,\n" +
                 "  `age` int(11) NOT NULL DEFAULT '23',\n" +

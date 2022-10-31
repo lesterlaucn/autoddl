@@ -7,10 +7,11 @@ import java.time.LocalDateTime;
 
 /**
  * Created by liuyuancheng on 2022/10/31  <br/>
+ * MySQL数据类型与Java类型的映射
  *
  * @author liuyuancheng
  */
-public enum ColumnDataType {
+public enum ColumnType2Java {
     MySQL_int(Integer.class,11),
     MySQL_bigint(Long.class,20),
     MySQL_datetime(LocalDateTime.class,11),
@@ -29,7 +30,7 @@ public enum ColumnDataType {
     @Getter
     Integer defaultLength;
 
-    ColumnDataType(Class<?> javaType,Integer defaultLength) {
+    ColumnType2Java(Class<?> javaType, Integer defaultLength) {
         this.javaType = javaType;
         this.defaultLength = defaultLength;
     }

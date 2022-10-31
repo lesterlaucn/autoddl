@@ -3,7 +3,7 @@ package com.lesterlaucn.autoddl4j.parser.ddl;
 
 import com.google.common.collect.Lists;
 import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
-import com.lesterlaucn.autoddl4j.datasource.definition.ColumnDataType;
+import com.lesterlaucn.autoddl4j.datasource.definition.ColumnType2Java;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
 import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
@@ -18,12 +18,12 @@ import java.util.regex.Pattern;
 
 /**
  * Created by liuyuancheng on 2022/10/27  <br/>
- * 每次处理一张表
+ * 每次处理一张表(MySQL)
  *
  * @author liuyuancheng
  */
 @Slf4j
-public class MySqlTableDdlParser {
+public class MySqlTableDdlParser implements ITableDdlParser{
 
     private static final String CREATE_TABLE = "CREATE TABLE";
 
@@ -45,6 +45,7 @@ public class MySqlTableDdlParser {
         this.ddl = ddl;
     }
 
+    @Override
     public EntityParserResult parse() {
         parsePrimaryKeys();
         final StringTokenizer tokenizer = new StringTokenizer(ddl, "\n");
@@ -126,7 +127,7 @@ public class MySqlTableDdlParser {
         matcher = pattern.matcher(token);
         if (matcher.find()) {
             final String dataType = matcher.toMatchResult().group(1);
-            column.setJavaType(ColumnDataType.valueOf(TABLE_ENGINE_PREFIX + dataType).getJavaType());
+            column.setJavaType(ColumnType2Java.valueOf(TABLE_ENGINE_PREFIX + dataType).getJavaType());
         }
         // 字段类型长度
         pattern = Pattern.compile("` ([a-z]{2,})(\\(([0-9]*)\\))?");
@@ -138,7 +139,7 @@ public class MySqlTableDdlParser {
                 column.setLength(Integer.parseInt(length));
             }
             if (Objects.isNull(column.getLength())) {
-                column.setLength(ColumnDataType.valueOf(TABLE_ENGINE_PREFIX + dataType).getDefaultLength());
+                column.setLength(ColumnType2Java.valueOf(TABLE_ENGINE_PREFIX + dataType).getDefaultLength());
             }
             log.debug("字段{} 长度为 {}", column.getColumnName(), column.getLength());
         }
@@ -178,7 +179,7 @@ public class MySqlTableDdlParser {
             pattern = Pattern.compile("COMMENT='(.*)");
             matcher = pattern.matcher(token);
             if (matcher.find()) {
-                currentTable.setComment(matcher.toMatchResult().group(1).toUpperCase());
+                currentTable.setComment(matcher.toMatchResult().group(1));
             }
             currentTable.setDataBaseType(DbType.MySQL);
             return true;
