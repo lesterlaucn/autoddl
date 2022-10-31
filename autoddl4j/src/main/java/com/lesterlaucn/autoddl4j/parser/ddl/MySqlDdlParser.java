@@ -2,6 +2,7 @@ package com.lesterlaucn.autoddl4j.parser.ddl;
 
 
 import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
+import com.lesterlaucn.autoddl4j.datasource.definition.ColumnDataType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
 import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
 import lombok.extern.slf4j.Slf4j;
@@ -31,20 +32,21 @@ public class MySqlDdlParser {
         this.ddl = ddl;
     }
 
-    //TODO 未完成
     public EntityParserResult parse() {
         final StringTokenizer tokenizer = new StringTokenizer(ddl, "\n");
         EntityParserResult.Table currentTable = null;
         boolean isColumnDefinition = false;
+        // 列的位置顺序
+        Integer columnOrdinalPosition = 1;
         while (tokenizer.hasMoreElements()) {
             final String token = tokenizer.nextToken();
             if (StringUtils.isBlank(token)) continue;
             // 处理表(开始)
             final String tableName = parseTableStart(token);
             if (!isColumnDefinition && StringUtils.isNotEmpty(tableName)) {
-                log.debug("parse table {}", tableName);
                 currentTable = this.result.getTable(tableName);
                 currentTable.setTableName(tableName);
+                currentTable.setFormerName(new String[]{tableName});
                 isColumnDefinition = true;
                 continue;
             }
@@ -54,7 +56,8 @@ public class MySqlDdlParser {
             }
             // 处理字段
             if (isColumnDefinition) {
-                parseColumn(token, currentTable);
+                parseColumn(token, columnOrdinalPosition, currentTable);
+                columnOrdinalPosition++;
             }
         }
         return result;
@@ -64,24 +67,40 @@ public class MySqlDdlParser {
      * 处理表字段
      *
      * @param token
+     * @param columnOrdinalPosition
      * @param currentTable
      */
-    private void parseColumn(String token, EntityParserResult.Table currentTable) {
+    private void parseColumn(String token, Integer columnOrdinalPosition, EntityParserResult.Table currentTable) {
         final EntityParserResult.Column column = new EntityParserResult.Column();
         Pattern pattern = null;
+        // 匹配字段名
         Matcher matcher = null;
         pattern = Pattern.compile("`([a-zA-Z0-9_]+)`");
         matcher = pattern.matcher(token);
         if (!matcher.find()) {
-            log.warn("colum not found for token: {}", token);
             return;
         }
         column.setColumnName(matcher.toMatchResult().group(1));
         column.setIsNullable(!token.contains("NOT NULL"));
-        pattern = Pattern.compile("DEFAULT '([.]+)'");
+        column.setOrdinalPosition(columnOrdinalPosition);
+        // 匹配默认值
+        pattern = Pattern.compile("DEFAULT '(.*?)'");
         matcher = pattern.matcher(token);
-        if (matcher.find()){
+        if (matcher.find()) {
             column.setDefaultValue(matcher.toMatchResult().group(1));
+        }
+        // 匹配字段注释
+        pattern = Pattern.compile("COMMENT '(.*?)'");
+        matcher = pattern.matcher(token);
+        if (matcher.find()) {
+            column.setComment(matcher.toMatchResult().group(1));
+        }
+        // 字段类型解析
+        pattern = Pattern.compile("` ([a-z]{2,})[ (]");
+        matcher = pattern.matcher(token);
+        if (matcher.find()) {
+            final String dataType = matcher.toMatchResult().group(1);
+            column.setJavaType(ColumnDataType.valueOf(TABLE_ENGINE_PREFIX+dataType).getJavaType());
         }
         currentTable.addColumn(column);
     }

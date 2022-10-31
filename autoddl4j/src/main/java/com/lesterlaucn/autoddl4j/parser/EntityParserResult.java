@@ -18,22 +18,25 @@ import java.util.Map;
  */
 public class EntityParserResult implements Serializable {
 
+    private Map<String, Table> tables;
+
+    private EntityParserResult(){
+        this.tables = Maps.newHashMap();
+    }
+
     public static EntityParserResult create() {
         return new EntityParserResult();
     }
 
-    private Map<String, Table> tables = Maps.newHashMap();
-
+    /**
+     * 创建并获取Table
+     *
+     * @param type
+     * @return
+     */
     public synchronized Table getTable(String type) {
         if (!tables.containsKey(type)) {
             this.tables.put(type, new Table());
-        }
-        return this.tables.get(type);
-    }
-
-    public synchronized Table addTable(String type,Table table) {
-        if (!tables.containsKey(type)) {
-            this.tables.put(type, table);
         }
         return this.tables.get(type);
     }
@@ -143,6 +146,6 @@ public class EntityParserResult implements Serializable {
 
     @Override
     public String toString() {
-        return JsonUtil.toJsonStr(this);
+        return JsonUtil.toJsonPrettyStr(this.tables);
     }
 }
