@@ -112,11 +112,6 @@ public class EntityParserResult implements Serializable {
         private Boolean unique = false;
 
         /**
-         * decimal的总长度
-         */
-        private Integer decimalPrecision;
-
-        /**
          * decimal类型小数精度
          */
         private Integer decimalScale;

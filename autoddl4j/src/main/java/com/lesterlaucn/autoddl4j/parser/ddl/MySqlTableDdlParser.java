@@ -3,7 +3,7 @@ package com.lesterlaucn.autoddl4j.parser.ddl;
 
 import com.google.common.collect.Lists;
 import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
-import com.lesterlaucn.autoddl4j.datasource.definition.ColumnType2Java;
+import com.lesterlaucn.autoddl4j.datasource.definition.type.ColumnType2Java;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
 import com.lesterlaucn.autoddl4j.parser.EntityParserResult;

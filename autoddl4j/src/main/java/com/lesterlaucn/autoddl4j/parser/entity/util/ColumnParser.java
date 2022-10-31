@@ -47,7 +47,6 @@ public class ColumnParser {
                     .setDefaultValue(parseDefaultValue(field))
                     .setIsPrimaryKey(parseIsPrimaryKey(field))
                     .setDecimalScale(parseDecimalScale(field))
-                    .setDecimalPrecision(parseDecimalPrecision(field))
                     .setComment(parseComment(field));
             table.addColumn(columnDef);
         }
@@ -153,6 +152,12 @@ public class ColumnParser {
         }
         if (Objects.isNull(length) && Objects.nonNull(field.getAnnotation(jakarta.persistence.Column.class))) {
             length = field.getAnnotation(jakarta.persistence.Column.class).length();
+        }
+        if (Objects.nonNull(field.getAnnotation(javax.persistence.Column.class))) {
+            length = field.getAnnotation(javax.persistence.Column.class).precision();
+        }
+        if (Objects.isNull(length) && Objects.nonNull(field.getAnnotation(jakarta.persistence.Column.class))) {
+            length = field.getAnnotation(jakarta.persistence.Column.class).precision();
         }
         if (Objects.isNull(length) && field.getType().equals(String.class)) {
             length = 255;

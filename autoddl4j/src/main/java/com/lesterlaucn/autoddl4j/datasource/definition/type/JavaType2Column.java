@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.datasource.definition;
+package com.lesterlaucn.autoddl4j.datasource.definition.type;
 
 import lombok.Getter;
 
