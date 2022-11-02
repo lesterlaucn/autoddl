@@ -8,7 +8,7 @@ class MySqlITableDdlParserTest {
 
 
     @BeforeEach
-    void setup(){
+    void setup() {
     }
 
     @Test
