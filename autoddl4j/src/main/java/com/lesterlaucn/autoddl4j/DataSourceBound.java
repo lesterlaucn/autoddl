@@ -1,7 +1,9 @@
 package com.lesterlaucn.autoddl4j;
 
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
-import lombok.Getter;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
@@ -10,19 +12,34 @@ import javax.sql.DataSource;
  *
  * @author liuyuancheng
  */
+@Builder
 @Getter
 public class DataSourceBound {
-    private DataSource dataSource;
+
     private DbType dbType;
-    private String packageName;
 
-    private DataSourceBound(DataSource dataSource, DbType dbType, String packageName) {
-        this.dataSource = dataSource;
-        this.dbType = dbType;
-        this.packageName = packageName;
+    @NonNull
+    private String[] packageScan;
+
+    @NonNull
+    private String username;
+
+    @NonNull
+    private String password;
+
+    @NonNull
+    private String url;
+
+    @NonNull
+    private String driverClassName;
+
+    public DriverManagerDataSource getDataSource(){
+        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setUsername(username);
+        dataSource.setUrl(url.trim());
+        dataSource.setPassword(password);
+        dataSource.setDriverClassName(driverClassName);
+        return dataSource;
     }
 
-    public static DataSourceBound create(DbType dbType, String packageName, DataSource dataSource) {
-        return new DataSourceBound(dataSource, dbType, packageName);
-    }
 }

@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.sql.DataSource;
 import java.util.Map;
 import java.util.Objects;
 
@@ -18,8 +17,6 @@ import java.util.Objects;
 public class MigrationExecutor {
 
     private static volatile MigrationExecutor instance;
-
-    private Map<String, DataSourceBound> dataSourceBoundMap = Maps.newHashMap();
 
     private Map<String, JdbcTemplate> jdbcTemplateMap = Maps.newHashMap();
 
@@ -40,11 +37,15 @@ public class MigrationExecutor {
      * @param dataSourceBound
      */
     public MigrationExecutor register(DataSourceBound dataSourceBound) {
-        log.info("Registering new dataSource {}", dataSourceBound.getPackageName());
-        dataSourceBoundMap.put(dataSourceBound.getPackageName(), dataSourceBound);
-        jdbcTemplateMap.put(dataSourceBound.getPackageName(), new JdbcTemplate(dataSourceBound.getDataSource()));
+        Objects.requireNonNull(dataSourceBound, "数据源必须配置");
+        final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSourceBound.getDataSource());
+        for (String packageScan : dataSourceBound.getPackageScan()) {
+            log.info("Registering new jdbcTemplate for entity directory {}", packageScan);
+            jdbcTemplateMap.put(packageScan.trim(), jdbcTemplate);
+        }
         return this;
     }
+
 
     private MigrationExecutor() {
     }

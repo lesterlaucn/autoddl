@@ -1,18 +1,22 @@
-package com.lesterlaucn.autoddl4j;
+package com.lesterlaucn.autoddl4j.datasource;
 
+import com.lesterlaucn.autoddl4j.DataSourceBound;
+import com.lesterlaucn.autoddl4j.MigrationExecutor;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
-class MigrationExecutorTest {
+class DataSourceMetaTest {
 
     public static final String TEST_ENTITY = "com.lesterlaucn.autoddl4j.demo.entity";
 
     private MigrationExecutor migrationExecutor;
+
+    private DataSourceMeta dataSourceMeta;
 
     @BeforeEach
     void setup() {
@@ -27,23 +31,23 @@ class MigrationExecutorTest {
                 .packageScan(new String[]{TEST_ENTITY})
                 .build();
         migrationExecutor.register(dataSourceBound);
-    }
-
-    @Test
-    void getJdbcTemplate() {
         final JdbcTemplate jdbcTemplate = migrationExecutor.getJdbcTemplate(TEST_ENTITY);
-        final List<Map<String, Object>> tables = jdbcTemplate.queryForList("show tables");
-        System.out.println(tables);
-//        final Map<String, Object> parserTest = jdbcTemplate.queryForMap("show create table " + tables.get(0).get("Tables_in_autoddl4j"));
-//        System.out.println(parserTest.get("Create Table"));
+        Objects.requireNonNull(jdbcTemplate);
+        dataSourceMeta = DataSourceMeta.create(DbType.MySQL, jdbcTemplate);
     }
 
     @Test
-    void register() {
-
+    void create() {
+        dataSourceMeta.table().showCreateTable("autoddl4j_test1");
     }
 
     @Test
-    void execute() {
+    void table() {
+    }
+
+    @Test
+    void tableNames() {
+        final List<String> strings = dataSourceMeta.table().showTableNames();
+        System.out.println(strings);
     }
 }
