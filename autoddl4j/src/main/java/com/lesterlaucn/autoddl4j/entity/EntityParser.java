@@ -1,11 +1,8 @@
-package com.lesterlaucn.autoddl4j.parser.entity;
+package com.lesterlaucn.autoddl4j.entity;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
-import com.lesterlaucn.autoddl4j.parser.entity.util.ClasspathPackageScanner;
-import com.lesterlaucn.autoddl4j.parser.entity.util.ColumnParser;
-import com.lesterlaucn.autoddl4j.parser.entity.util.TableParser;
+import com.lesterlaucn.autoddl4j.EntityParserResult;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.util.ConfigurationBuilder;
 

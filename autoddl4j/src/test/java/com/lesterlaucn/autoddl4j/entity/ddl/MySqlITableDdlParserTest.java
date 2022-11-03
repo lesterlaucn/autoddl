@@ -1,6 +1,7 @@
-package com.lesterlaucn.autoddl4j.parser.ddl;
+package com.lesterlaucn.autoddl4j.entity.ddl;
 
-import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
+import com.lesterlaucn.autoddl4j.datasource.ddl.MySqlTableDdlParser;
+import com.lesterlaucn.autoddl4j.EntityParserResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,6 @@
 package com.lesterlaucn.autoddl4j.datasource;
 
-import com.lesterlaucn.autoddl4j.DataSourceBound;
-import com.lesterlaucn.autoddl4j.MigrationExecutor;
+import com.lesterlaucn.autoddl4j.MigrationSingleton;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,15 +13,15 @@ class DatabaseMetaTest {
 
     public static final String TEST_ENTITY = "com.lesterlaucn.autoddl4j.demo.entity";
 
-    private MigrationExecutor migrationExecutor;
+    private MigrationSingleton migrationExecutor;
 
     private DatabaseMeta dataSourceMeta;
 
     @BeforeEach
     void setup() {
-        migrationExecutor = MigrationExecutor.create();
+        migrationExecutor = MigrationSingleton.create();
 
-        DataSourceBound dataSourceBound = DataSourceBound.builder()
+        JdbcBound dataSourceBound = JdbcBound.builder()
                 .username("root")
                 .url("jdbc:mysql://192.168.0.36:3306/autoddl4j?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8")
                 .password("123456")

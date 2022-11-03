@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.parser.ddl;
+package com.lesterlaucn.autoddl4j.datasource.ddl;
 
 
 import com.google.common.collect.Lists;
@@ -6,7 +6,7 @@ import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
 import com.lesterlaucn.autoddl4j.datasource.definition.type.ColumnType2Java;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
-import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
+import com.lesterlaucn.autoddl4j.EntityParserResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 

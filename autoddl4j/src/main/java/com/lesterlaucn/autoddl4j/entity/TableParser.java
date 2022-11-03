@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.parser.entity.util;
+package com.lesterlaucn.autoddl4j.entity;
 
 import com.google.common.base.CaseFormat;
 import com.lesterlaucn.autoddl4j.annotations.TableExtend;
@@ -6,8 +6,9 @@ import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
 import com.lesterlaucn.autoddl4j.datasource.definition.Collation;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
-import com.lesterlaucn.autoddl4j.parser.EntityParserResult;
+import com.lesterlaucn.autoddl4j.EntityParserResult;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
@@ -16,6 +17,7 @@ import java.util.Objects;
  * @author liuyuancheng
  */
 @Data
+@Slf4j
 public class TableParser {
 
     private Class<?> type;

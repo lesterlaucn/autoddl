@@ -1,5 +1,6 @@
 package com.lesterlaucn.autoddl4j;
 
+import com.lesterlaucn.autoddl4j.datasource.JdbcBound;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,17 +9,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.List;
 import java.util.Map;
 
-class MigrationExecutorTest {
+class MigrationSingletonTest {
 
     public static final String TEST_ENTITY = "com.lesterlaucn.autoddl4j.demo.entity";
 
-    private MigrationExecutor migrationExecutor;
+    private MigrationSingleton migrationExecutor;
 
     @BeforeEach
     void setup() {
-        migrationExecutor = MigrationExecutor.create();
+        migrationExecutor = MigrationSingleton.create();
 
-        DataSourceBound dataSourceBound = DataSourceBound.builder()
+        JdbcBound dataSourceBound = JdbcBound.builder()
                 .username("root")
                 .url("jdbc:mysql://192.168.0.36:3306/autoddl4j?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8")
                 .password("123456")

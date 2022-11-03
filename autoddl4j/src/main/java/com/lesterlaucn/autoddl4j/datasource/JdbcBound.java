@@ -1,11 +1,8 @@
-package com.lesterlaucn.autoddl4j;
+package com.lesterlaucn.autoddl4j.datasource;
 
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import lombok.*;
-import lombok.experimental.Accessors;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
-import javax.sql.DataSource;
 
 /**
  * Created by liuyuancheng on 2022/10/27  <br/>
@@ -14,7 +11,7 @@ import javax.sql.DataSource;
  */
 @Builder
 @Getter
-public class DataSourceBound {
+public class JdbcBound {
 
     private DbType dbType;
 

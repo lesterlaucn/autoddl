@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.parser.entity.util;
+package com.lesterlaucn.autoddl4j.entity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

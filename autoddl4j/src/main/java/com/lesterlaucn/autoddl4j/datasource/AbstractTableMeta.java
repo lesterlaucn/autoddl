@@ -35,6 +35,12 @@ public abstract class AbstractTableMeta {
         return showTableNames(null);
     }
 
+    /**
+     * 表名
+     *
+     * @param databaseName
+     * @return
+     */
     public abstract List<String> showTableNames(String databaseName);
 
     /**

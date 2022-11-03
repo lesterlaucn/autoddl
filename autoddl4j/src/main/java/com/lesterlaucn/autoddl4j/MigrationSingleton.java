@@ -2,6 +2,7 @@ package com.lesterlaucn.autoddl4j;
 
 
 import com.google.common.collect.Maps;
+import com.lesterlaucn.autoddl4j.datasource.JdbcBound;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -14,9 +15,9 @@ import java.util.Objects;
  * @author liuyuancheng
  */
 @Slf4j
-public class MigrationExecutor {
+public class MigrationSingleton {
 
-    private static volatile MigrationExecutor instance;
+    private static volatile MigrationSingleton instance;
 
     private Map<String, JdbcTemplate> jdbcTemplateMap = Maps.newHashMap();
 
@@ -36,7 +37,7 @@ public class MigrationExecutor {
      *
      * @param dataSourceBound
      */
-    public MigrationExecutor register(DataSourceBound dataSourceBound) {
+    public MigrationSingleton register(JdbcBound dataSourceBound) {
         Objects.requireNonNull(dataSourceBound, "数据源必须配置");
         final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSourceBound.getDataSource());
         for (String packageScan : dataSourceBound.getPackageScan()) {
@@ -47,14 +48,14 @@ public class MigrationExecutor {
     }
 
 
-    private MigrationExecutor() {
+    private MigrationSingleton() {
     }
 
-    public synchronized static MigrationExecutor create() {
+    public synchronized static MigrationSingleton create() {
         if (Objects.isNull(instance)) {
-            synchronized (MigrationExecutor.class) {
+            synchronized (MigrationSingleton.class) {
                 if (Objects.isNull(instance)) {
-                    instance = new MigrationExecutor();
+                    instance = new MigrationSingleton();
                 }
             }
             return instance;

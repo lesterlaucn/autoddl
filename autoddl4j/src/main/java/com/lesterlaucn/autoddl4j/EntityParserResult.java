@@ -1,11 +1,10 @@
-package com.lesterlaucn.autoddl4j.parser;
+package com.lesterlaucn.autoddl4j;
 
 import com.google.common.collect.Maps;
 import com.lesterlaucn.autoddl4j.datasource.definition.*;
-import com.lesterlaucn.autoddl4j.parser.entity.util.JsonUtil;
+import com.lesterlaucn.autoddl4j.entity.JsonUtil;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.apache.commons.collections.map.LinkedMap;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;

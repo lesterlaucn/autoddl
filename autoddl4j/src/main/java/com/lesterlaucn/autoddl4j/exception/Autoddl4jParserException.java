@@ -5,5 +5,5 @@ package com.lesterlaucn.autoddl4j.exception;
  *
  * @author liuyuancheng
  */
-public class EntityParserException extends RuntimeException {
+public class Autoddl4jParserException extends RuntimeException {
 }
