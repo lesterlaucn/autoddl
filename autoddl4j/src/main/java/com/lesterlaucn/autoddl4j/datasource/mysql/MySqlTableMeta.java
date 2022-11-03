@@ -43,7 +43,6 @@ public class MySqlTableMeta extends AbstractTableMeta {
                 Matcher matcher = pattern.matcher(url);
                 if (matcher.find()){
                     databaseName = matcher.toMatchResult().group(1);
-                    System.out.println(databaseName);
                 }else{
                     throw new RuntimeException("error");
                 }
