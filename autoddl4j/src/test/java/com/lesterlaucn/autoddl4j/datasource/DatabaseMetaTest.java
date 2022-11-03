@@ -1,6 +1,6 @@
 package com.lesterlaucn.autoddl4j.datasource;
 
-import com.lesterlaucn.autoddl4j.MigrationSingleton;
+import com.lesterlaucn.autoddl4j.DataMigrationSingleton;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,13 +13,13 @@ class DatabaseMetaTest {
 
     public static final String TEST_ENTITY = "com.lesterlaucn.autoddl4j.demo.entity";
 
-    private MigrationSingleton migrationExecutor;
+    private DataMigrationSingleton migrationExecutor;
 
     private DatabaseMeta dataSourceMeta;
 
     @BeforeEach
     void setup() {
-        migrationExecutor = MigrationSingleton.create();
+        migrationExecutor = DataMigrationSingleton.create();
 
         JdbcBound dataSourceBound = JdbcBound.builder()
                 .username("root")

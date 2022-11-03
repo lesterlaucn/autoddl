@@ -1,12 +1,12 @@
 package com.lesterlaucn.autoddl4j.entity;
 
 import com.google.common.base.CaseFormat;
+import com.lesterlaucn.autoddl4j.DataDef;
 import com.lesterlaucn.autoddl4j.annotations.TableExtend;
 import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
 import com.lesterlaucn.autoddl4j.datasource.definition.Collation;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
-import com.lesterlaucn.autoddl4j.EntityParserResult;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -22,13 +22,13 @@ public class TableParser {
 
     private Class<?> type;
 
-    private EntityParserResult.Table table;
+    private DataDef.Table table;
 
     private TableParser() {
 
     }
 
-    public static void parse(Class<?> type, EntityParserResult.Table table) {
+    public static void parse(Class<?> type, DataDef.Table table) {
         final TableParser tableParser = new TableParser();
         tableParser.setTable(table);
         tableParser.setType(type);

@@ -16,16 +16,15 @@ import java.util.Map;
  *
  * @author liuyuancheng
  */
-public class EntityParserResult implements Serializable {
+public class DataDef implements Serializable {
 
-    private Map<String, Table> tables;
+    private final Map<String, Table> tables = Maps.newHashMap();
 
-    private EntityParserResult() {
-        this.tables = Maps.newHashMap();
+    private DataDef() {
     }
 
-    public static EntityParserResult create() {
-        return new EntityParserResult();
+    public static DataDef create() {
+        return new DataDef();
     }
 
     /**

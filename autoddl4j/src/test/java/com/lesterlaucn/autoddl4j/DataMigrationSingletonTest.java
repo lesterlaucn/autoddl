@@ -9,15 +9,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.List;
 import java.util.Map;
 
-class MigrationSingletonTest {
+class DataMigrationSingletonTest {
 
     public static final String TEST_ENTITY = "com.lesterlaucn.autoddl4j.demo.entity";
 
-    private MigrationSingleton migrationExecutor;
+    private DataMigrationSingleton migrationExecutor;
 
     @BeforeEach
     void setup() {
-        migrationExecutor = MigrationSingleton.create();
+        migrationExecutor = DataMigrationSingleton.create();
 
         JdbcBound dataSourceBound = JdbcBound.builder()
                 .username("root")

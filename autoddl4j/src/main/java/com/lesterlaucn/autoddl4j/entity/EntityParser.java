@@ -2,7 +2,7 @@ package com.lesterlaucn.autoddl4j.entity;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.lesterlaucn.autoddl4j.EntityParserResult;
+import com.lesterlaucn.autoddl4j.DataDef;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.util.ConfigurationBuilder;
 
@@ -70,11 +70,11 @@ public class EntityParser {
     /**
      * 解析Table类型
      *
-     * @param result   EntityParserResult.create()
+     * @param result   DataDef.create()
      * @param entities 需要解析的
      * @return
      */
-    public EntityParserResult parserTableEntity(EntityParserResult result, Class<?>... entities) {
+    public DataDef parserTableEntity(DataDef result, Class<?>... entities) {
         for (Class<?> entity : entities) {
             TableParser.parse(entity, result.getTable(entity.getCanonicalName()));
             ColumnParser.parse(entity, result.getTable(entity.getCanonicalName()));

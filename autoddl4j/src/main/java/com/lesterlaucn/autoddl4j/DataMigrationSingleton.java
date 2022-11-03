@@ -15,11 +15,11 @@ import java.util.Objects;
  * @author liuyuancheng
  */
 @Slf4j
-public class MigrationSingleton {
+public class DataMigrationSingleton {
 
-    private static volatile MigrationSingleton instance;
+    private static volatile DataMigrationSingleton instance;
 
-    private Map<String, JdbcTemplate> jdbcTemplateMap = Maps.newHashMap();
+    private final Map<String, JdbcTemplate> jdbcTemplateMap = Maps.newHashMap();
 
 
     /**
@@ -37,7 +37,7 @@ public class MigrationSingleton {
      *
      * @param dataSourceBound
      */
-    public MigrationSingleton register(JdbcBound dataSourceBound) {
+    public DataMigrationSingleton register(JdbcBound dataSourceBound) {
         Objects.requireNonNull(dataSourceBound, "数据源必须配置");
         final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSourceBound.getDataSource());
         for (String packageScan : dataSourceBound.getPackageScan()) {
@@ -48,14 +48,14 @@ public class MigrationSingleton {
     }
 
 
-    private MigrationSingleton() {
+    private DataMigrationSingleton() {
     }
 
-    public synchronized static MigrationSingleton create() {
+    public synchronized static DataMigrationSingleton create() {
         if (Objects.isNull(instance)) {
-            synchronized (MigrationSingleton.class) {
+            synchronized (DataMigrationSingleton.class) {
                 if (Objects.isNull(instance)) {
-                    instance = new MigrationSingleton();
+                    instance = new DataMigrationSingleton();
                 }
             }
             return instance;

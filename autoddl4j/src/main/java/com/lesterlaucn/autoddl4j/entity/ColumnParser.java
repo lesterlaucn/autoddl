@@ -2,7 +2,7 @@ package com.lesterlaucn.autoddl4j.entity;
 
 
 import com.google.common.base.CaseFormat;
-import com.lesterlaucn.autoddl4j.EntityParserResult;
+import com.lesterlaucn.autoddl4j.DataDef;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -26,7 +26,7 @@ public class ColumnParser {
 
     private List<Field> fields;
 
-    private EntityParserResult.Table table;
+    private DataDef.Table table;
 
     private ColumnParser() {
 
@@ -36,7 +36,7 @@ public class ColumnParser {
         this.fields = Arrays.asList(type.getDeclaredFields());
         for (int i = 0; i < this.fields.size(); i++) {
             Field field = this.fields.get(i);
-            final EntityParserResult.Column columnDef = new EntityParserResult.Column()
+            final DataDef.Column columnDef = new DataDef.Column()
                     .setJavaType(field.getType())
                     .setColumnOriginal(field.getName())
                     .setColumnName(parseColumnName(field))
@@ -199,7 +199,7 @@ public class ColumnParser {
         return "";
     }
 
-    public static void parse(Class<?> type, EntityParserResult.Table result) {
+    public static void parse(Class<?> type, DataDef.Table result) {
         final ColumnParser columnParser = new ColumnParser();
         columnParser.setTable(result);
         columnParser.setType(type);

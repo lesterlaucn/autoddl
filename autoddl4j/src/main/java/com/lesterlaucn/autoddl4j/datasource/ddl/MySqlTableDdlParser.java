@@ -6,7 +6,7 @@ import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
 import com.lesterlaucn.autoddl4j.datasource.definition.type.ColumnType2Java;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
-import com.lesterlaucn.autoddl4j.EntityParserResult;
+import com.lesterlaucn.autoddl4j.DataDef;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,17 +39,17 @@ public class MySqlTableDdlParser implements ITableDdlParser{
      */
     private List<String> primaryKeys = Lists.newArrayList();
 
-    private EntityParserResult result = EntityParserResult.create();
+    private DataDef result = DataDef.create();
 
     public MySqlTableDdlParser(String ddl) {
         this.ddl = ddl;
     }
 
     @Override
-    public EntityParserResult parse() {
+    public DataDef parse() {
         parsePrimaryKeys();
         final StringTokenizer tokenizer = new StringTokenizer(ddl, "\n");
-        EntityParserResult.Table currentTable = null;
+        DataDef.Table currentTable = null;
         boolean isColumnDefinition = false;
         // 列的位置顺序
         Integer columnOrdinalPosition = 1;
@@ -96,8 +96,8 @@ public class MySqlTableDdlParser implements ITableDdlParser{
      * @param columnOrdinalPosition
      * @param currentTable
      */
-    private void parseColumn(String token, Integer columnOrdinalPosition, EntityParserResult.Table currentTable) {
-        final EntityParserResult.Column column = new EntityParserResult.Column();
+    private void parseColumn(String token, Integer columnOrdinalPosition, DataDef.Table currentTable) {
+        final DataDef.Column column = new DataDef.Column();
         token = token.trim();
         Pattern pattern = null;
         // 匹配字段名
@@ -159,7 +159,7 @@ public class MySqlTableDdlParser implements ITableDdlParser{
      * @param currentTable
      * @return
      */
-    private boolean parseTableEnd(String token, EntityParserResult.Table currentTable) {
+    private boolean parseTableEnd(String token, DataDef.Table currentTable) {
         if (StringUtils.startsWith(token.trim(), ")")) {
             Pattern pattern = null;
             Matcher matcher = null;

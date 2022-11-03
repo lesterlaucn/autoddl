@@ -1,7 +1,7 @@
 package com.lesterlaucn.autoddl4j.entity;
 
+import com.lesterlaucn.autoddl4j.DataDef;
 import com.lesterlaucn.autoddl4j.demo.entity.Javax2Swagger2Simple;
-import com.lesterlaucn.autoddl4j.EntityParserResult;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,8 +33,8 @@ class EntityParserTest {
 
     @Test
     void parserTableEntity() {
-        final EntityParserResult parserResult = entityParser.parserTableEntity(
-                EntityParserResult.create(),
+        final DataDef parserResult = entityParser.parserTableEntity(
+                DataDef.create(),
                 Javax2Swagger2Simple.class);
         System.out.println(parserResult);
     }
