@@ -2,7 +2,7 @@ package com.lesterlaucn.autoddl4j.datasource.ddl;
 
 
 import com.google.common.collect.Lists;
-import com.lesterlaucn.autoddl4j.TableSchemaDef;
+import com.lesterlaucn.autoddl4j.TableDef;
 import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
 import com.lesterlaucn.autoddl4j.datasource.definition.type.ColumnType2Java;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
@@ -39,17 +39,17 @@ public class MySqlTableDdlParser implements ITableDdlParser{
      */
     private List<String> primaryKeys = Lists.newArrayList();
 
-    private TableSchemaDef result = TableSchemaDef.create();
+    private TableDef result = TableDef.create();
 
     public MySqlTableDdlParser(String ddl) {
         this.ddl = ddl;
     }
 
     @Override
-    public TableSchemaDef parse() {
+    public TableDef parse() {
         parsePrimaryKeys();
         final StringTokenizer tokenizer = new StringTokenizer(ddl, "\n");
-        TableSchemaDef.Table currentTable = null;
+        TableDef.Table currentTable = null;
         boolean isColumnDefinition = false;
         // 列的位置顺序
         Integer columnOrdinalPosition = 1;
@@ -96,8 +96,8 @@ public class MySqlTableDdlParser implements ITableDdlParser{
      * @param columnOrdinalPosition
      * @param currentTable
      */
-    private void parseColumn(String token, Integer columnOrdinalPosition, TableSchemaDef.Table currentTable) {
-        final TableSchemaDef.Column column = new TableSchemaDef.Column();
+    private void parseColumn(String token, Integer columnOrdinalPosition, TableDef.Table currentTable) {
+        final TableDef.Column column = new TableDef.Column();
         token = token.trim();
         Pattern pattern = null;
         // 匹配字段名
@@ -159,7 +159,7 @@ public class MySqlTableDdlParser implements ITableDdlParser{
      * @param currentTable
      * @return
      */
-    private boolean parseTableEnd(String token, TableSchemaDef.Table currentTable) {
+    private boolean parseTableEnd(String token, TableDef.Table currentTable) {
         if (StringUtils.startsWith(token.trim(), ")")) {
             Pattern pattern = null;
             Matcher matcher = null;

@@ -1,6 +1,6 @@
 package com.lesterlaucn.autoddl4j.entity.ddl;
 
-import com.lesterlaucn.autoddl4j.TableSchemaDef;
+import com.lesterlaucn.autoddl4j.TableDef;
 import com.lesterlaucn.autoddl4j.datasource.ddl.MySqlTableDdlParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ class MySqlITableDdlParserTest {
                 "  PRIMARY KEY (`id`)\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8";
         final MySqlTableDdlParser ddlParser = new MySqlTableDdlParser(ddl);
-        final TableSchemaDef parse = ddlParser.parse();
+        final TableDef parse = ddlParser.parse();
         System.out.println(parse.toString());
     }
 
@@ -40,7 +40,7 @@ class MySqlITableDdlParserTest {
                 "  KEY `idx_idc` (`age`,`idcard`) USING BTREE\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表注释'";
         final MySqlTableDdlParser ddlParser = new MySqlTableDdlParser(ddl);
-        final TableSchemaDef parse = ddlParser.parse();
+        final TableDef parse = ddlParser.parse();
         System.out.println(parse.toString());
     }
 
