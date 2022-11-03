@@ -1,6 +1,6 @@
 package com.lesterlaucn.autoddl4j.datasource.ddl;
 
-import com.lesterlaucn.autoddl4j.DataDef;
+import com.lesterlaucn.autoddl4j.TableSchemaDef;
 
 /**
  * Created by liuyuancheng on 2022/10/31  <br/>
@@ -13,5 +13,5 @@ public interface ITableDdlParser {
      *
      * @return
      */
-    public DataDef parse();
+    public TableSchemaDef parse();
 }

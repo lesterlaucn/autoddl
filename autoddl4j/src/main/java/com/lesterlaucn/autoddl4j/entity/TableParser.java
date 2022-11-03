@@ -1,7 +1,7 @@
 package com.lesterlaucn.autoddl4j.entity;
 
 import com.google.common.base.CaseFormat;
-import com.lesterlaucn.autoddl4j.DataDef;
+import com.lesterlaucn.autoddl4j.TableSchemaDef;
 import com.lesterlaucn.autoddl4j.annotations.TableExtend;
 import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
 import com.lesterlaucn.autoddl4j.datasource.definition.Collation;
@@ -22,13 +22,13 @@ public class TableParser {
 
     private Class<?> type;
 
-    private DataDef.Table table;
+    private TableSchemaDef.Table table;
 
     private TableParser() {
 
     }
 
-    public static void parse(Class<?> type, DataDef.Table table) {
+    public static void parse(Class<?> type, TableSchemaDef.Table table) {
         final TableParser tableParser = new TableParser();
         tableParser.setTable(table);
         tableParser.setType(type);

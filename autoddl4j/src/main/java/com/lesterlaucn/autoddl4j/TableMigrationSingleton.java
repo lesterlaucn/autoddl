@@ -15,9 +15,9 @@ import java.util.Objects;
  * @author liuyuancheng
  */
 @Slf4j
-public class DataMigrationSingleton {
+public class TableMigrationSingleton {
 
-    private static volatile DataMigrationSingleton instance;
+    private static volatile TableMigrationSingleton instance;
 
     private final Map<String, JdbcTemplate> jdbcTemplateMap = Maps.newHashMap();
 
@@ -37,7 +37,7 @@ public class DataMigrationSingleton {
      *
      * @param dataSourceBound
      */
-    public DataMigrationSingleton register(JdbcBound dataSourceBound) {
+    public TableMigrationSingleton register(JdbcBound dataSourceBound) {
         Objects.requireNonNull(dataSourceBound, "数据源必须配置");
         final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSourceBound.getDataSource());
         for (String packageScan : dataSourceBound.getPackageScan()) {
@@ -48,14 +48,14 @@ public class DataMigrationSingleton {
     }
 
 
-    private DataMigrationSingleton() {
+    private TableMigrationSingleton() {
     }
 
-    public synchronized static DataMigrationSingleton create() {
+    public synchronized static TableMigrationSingleton create() {
         if (Objects.isNull(instance)) {
-            synchronized (DataMigrationSingleton.class) {
+            synchronized (TableMigrationSingleton.class) {
                 if (Objects.isNull(instance)) {
-                    instance = new DataMigrationSingleton();
+                    instance = new TableMigrationSingleton();
                 }
             }
             return instance;

@@ -16,15 +16,15 @@ import java.util.Map;
  *
  * @author liuyuancheng
  */
-public class DataDef implements Serializable {
+public class TableSchemaDef implements Serializable {
 
     private final Map<String, Table> tables = Maps.newHashMap();
 
-    private DataDef() {
+    private TableSchemaDef() {
     }
 
-    public static DataDef create() {
-        return new DataDef();
+    public static TableSchemaDef create() {
+        return new TableSchemaDef();
     }
 
     /**
