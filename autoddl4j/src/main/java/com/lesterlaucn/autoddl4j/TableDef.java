@@ -2,9 +2,11 @@ package com.lesterlaucn.autoddl4j;
 
 import com.google.common.collect.Maps;
 import com.lesterlaucn.autoddl4j.datasource.definition.*;
-import com.lesterlaucn.autoddl4j.entity.JsonUtil;
+import com.lesterlaucn.autoddl4j.util.JsonUtil;
 import lombok.Data;
+import lombok.NonNull;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
@@ -20,6 +22,8 @@ public class TableDef implements Serializable {
 
     private final Map<String, Table> tables = Maps.newHashMap();
 
+    private final Map<String, String> tableEntityMap = Maps.newHashMap();
+
     private TableDef() {
     }
 
@@ -27,19 +31,38 @@ public class TableDef implements Serializable {
         return new TableDef();
     }
 
+    public Table getTable(@NonNull String tableName) {
+        return getTable(tableName, null);
+    }
+
     /**
      * 创建并获取Table
      *
-     * @param type
+     * @param tableName
+     * @param packageScan
      * @return
      */
-    public synchronized Table getTable(String type) {
-        if (!tables.containsKey(type)) {
-            this.tables.put(type, new Table());
+    public synchronized Table getTable(@NonNull String tableName, String packageScan) {
+        if (!tables.containsKey(tableName)) {
+            this.tables.put(tableName, new Table());
+            this.tableEntityMap.put(tableName, StringUtils.isEmpty(packageScan) ? "" : packageScan);
         }
-        return this.tables.get(type);
+        return this.tables.get(tableName);
     }
 
+    /**
+     * 获取表名对应的Entity名称
+     *
+     * @param tableName 表名
+     * @return 类的全限定名
+     */
+    public String getTableMappedType(@NonNull String tableName) {
+        return this.tableEntityMap.getOrDefault(tableName, null);
+    }
+
+    /**
+     * 表格的定义
+     */
     @Data
     @Accessors(chain = true)
     public static class Table implements Serializable {

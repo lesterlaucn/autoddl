@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.entity;
+package com.lesterlaucn.autoddl4j.entity.common;
 
 import com.google.common.base.CaseFormat;
 import com.lesterlaucn.autoddl4j.TableDef;
@@ -28,6 +28,12 @@ public class TableParser {
 
     }
 
+    /**
+     * Type 解析为表
+     *
+     * @param type
+     * @param table
+     */
     public static void parse(Class<?> type, TableDef.Table table) {
         final TableParser tableParser = new TableParser();
         tableParser.setTable(table);
@@ -90,6 +96,10 @@ public class TableParser {
     }
 
     private String parseTableName(Class<?> type) {
+        return readTableName(type);
+    }
+
+    public static String readTableName(Class<?> type) {
         String tableName = "";
         String tablePrefix = "";
         if (StringUtils.isEmpty(tableName) && Objects.nonNull(type.getAnnotation(javax.persistence.Table.class))) {

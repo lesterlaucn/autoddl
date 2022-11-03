@@ -3,6 +3,9 @@ package com.lesterlaucn.autoddl4j.entity;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.lesterlaucn.autoddl4j.TableDef;
+import com.lesterlaucn.autoddl4j.entity.common.ClasspathPackageScanner;
+import com.lesterlaucn.autoddl4j.entity.common.ColumnParser;
+import com.lesterlaucn.autoddl4j.entity.common.TableParser;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.util.ConfigurationBuilder;
 
@@ -44,9 +47,9 @@ public class EntityParser {
     }
 
     /**
-     * 获取类对象
+     * 扫描类对象
      *
-     * @return
+     * @return 带有@Table注解的所有类型
      */
     public Set<Class<?>> getTableTypes() {
         final Set<String> allClasses = getAllClasses();
@@ -76,8 +79,8 @@ public class EntityParser {
      */
     public TableDef parserTableEntity(TableDef result, Class<?>... entities) {
         for (Class<?> entity : entities) {
-            TableParser.parse(entity, result.getTable(entity.getCanonicalName()));
-            ColumnParser.parse(entity, result.getTable(entity.getCanonicalName()));
+            TableParser.parse(entity, result.getTable(TableParser.readTableName(entity), entity.getCanonicalName()));
+            ColumnParser.parse(entity, result.getTable(TableParser.readTableName(entity), entity.getCanonicalName()));
         }
         return result;
     }

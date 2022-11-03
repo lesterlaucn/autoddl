@@ -4,9 +4,9 @@ package com.lesterlaucn.autoddl4j.datasource.ddl;
 import com.google.common.collect.Lists;
 import com.lesterlaucn.autoddl4j.TableDef;
 import com.lesterlaucn.autoddl4j.datasource.definition.CharacterSet;
-import com.lesterlaucn.autoddl4j.datasource.definition.type.ColumnType2Java;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.definition.TableEngine;
+import com.lesterlaucn.autoddl4j.datasource.definition.type.ColumnType2Java;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
  * @author liuyuancheng
  */
 @Slf4j
-public class MySqlTableDdlParser implements ITableDdlParser{
+public class MySqlTableDdlParser implements ITableDdlParser {
 
     private static final String CREATE_TABLE = "CREATE TABLE";
 
@@ -59,7 +59,7 @@ public class MySqlTableDdlParser implements ITableDdlParser{
             // 处理表(开始)
             final String tableName = parseTableStart(token);
             if (!isColumnDefinition && StringUtils.isNotEmpty(tableName)) {
-                currentTable = this.result.getTable(tableName);
+                currentTable = this.result.getTable(tableName, "");
                 currentTable.setTableName(tableName);
                 currentTable.setFormerName(new String[]{tableName});
                 isColumnDefinition = true;

@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.entity;
+package com.lesterlaucn.autoddl4j.entity.common;
 
 
 import com.google.common.base.CaseFormat;
