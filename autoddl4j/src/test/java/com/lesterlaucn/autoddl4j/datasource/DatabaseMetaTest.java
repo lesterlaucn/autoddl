@@ -10,13 +10,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.List;
 import java.util.Objects;
 
-class DataSourceMetaTest {
+class DatabaseMetaTest {
 
     public static final String TEST_ENTITY = "com.lesterlaucn.autoddl4j.demo.entity";
 
     private MigrationExecutor migrationExecutor;
 
-    private DataSourceMeta dataSourceMeta;
+    private DatabaseMeta dataSourceMeta;
 
     @BeforeEach
     void setup() {
@@ -33,7 +33,7 @@ class DataSourceMetaTest {
         migrationExecutor.register(dataSourceBound);
         final JdbcTemplate jdbcTemplate = migrationExecutor.getJdbcTemplate(TEST_ENTITY);
         Objects.requireNonNull(jdbcTemplate);
-        dataSourceMeta = DataSourceMeta.create(DbType.MySQL, jdbcTemplate);
+        dataSourceMeta = DatabaseMeta.create(DbType.MySQL, jdbcTemplate);
     }
 
     @Test
