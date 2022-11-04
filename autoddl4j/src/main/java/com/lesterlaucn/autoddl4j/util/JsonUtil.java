@@ -3,6 +3,7 @@ package com.lesterlaucn.autoddl4j.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.lesterlaucn.autoddl4j.exception.Autoddl4jParserException;
 
 /**
  * Created by liuyuancheng on 2022/10/26  <br/>
@@ -21,7 +22,7 @@ public class JsonUtil {
         try {
             return objectMapper.writeValueAsString(o);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new Autoddl4jParserException(e);
         }
     }
 
@@ -29,7 +30,7 @@ public class JsonUtil {
         try {
             return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new Autoddl4jParserException(e);
         }
     }
 }

@@ -7,6 +7,7 @@ import com.lesterlaucn.autoddl4j.TableDef;
 import com.lesterlaucn.autoddl4j.codescanner.java.ClasspathPackageScanner;
 import com.lesterlaucn.autoddl4j.codescanner.java.ColumnParser;
 import com.lesterlaucn.autoddl4j.codescanner.java.TableParser;
+import com.lesterlaucn.autoddl4j.exception.Autoddl4jParserException;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.util.ConfigurationBuilder;
@@ -80,7 +81,7 @@ public class JavaEntityScanner {
                 }
             }
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new Autoddl4jParserException(e);
         }
         return Lists.newArrayList(returning);
     }

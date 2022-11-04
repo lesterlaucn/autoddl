@@ -6,4 +6,14 @@ package com.lesterlaucn.autoddl4j.exception;
  * @author liuyuancheng
  */
 public class Autoddl4jParserException extends RuntimeException {
+    public Autoddl4jParserException(Exception e) {
+        super(e);
+    }
+
+    public Autoddl4jParserException() {
+    }
+
+    public Autoddl4jParserException(String error) {
+        super(error);
+    }
 }

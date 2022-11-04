@@ -1,5 +1,6 @@
 package com.lesterlaucn.autoddl4j.codescanner.java;
 
+import com.lesterlaucn.autoddl4j.exception.Autoddl4jParserException;
 import com.lesterlaucn.autoddl4j.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,7 +56,7 @@ public class ClasspathPackageScanner {
         try {
             return doScan(basePackage, new ArrayList<>());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new Autoddl4jParserException(e);
         }
     }
 

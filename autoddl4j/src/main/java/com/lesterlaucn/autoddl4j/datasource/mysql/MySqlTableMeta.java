@@ -1,6 +1,7 @@
 package com.lesterlaucn.autoddl4j.datasource.mysql;
 
 import com.lesterlaucn.autoddl4j.datasource.AbstractTableMeta;
+import com.lesterlaucn.autoddl4j.exception.Autoddl4jParserException;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -44,7 +45,7 @@ public class MySqlTableMeta extends AbstractTableMeta {
                 if (matcher.find()){
                     databaseName = matcher.toMatchResult().group(1);
                 }else{
-                    throw new RuntimeException("error");
+                    throw new Autoddl4jParserException("error");
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);

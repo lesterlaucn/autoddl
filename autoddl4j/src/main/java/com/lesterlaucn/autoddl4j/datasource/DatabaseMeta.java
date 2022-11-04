@@ -4,6 +4,7 @@ package com.lesterlaucn.autoddl4j.datasource;
 import com.lesterlaucn.autoddl4j.TableDef;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.mysql.MySqlTableMeta;
+import com.lesterlaucn.autoddl4j.exception.Autoddl4jParserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -33,7 +34,7 @@ public class DatabaseMeta {
                 log.warn("ClickHouse is not supported yet.");
                 break;
             default:
-                throw new RuntimeException();
+                throw new Autoddl4jParserException();
         }
         return dataSourceMeta;
     }
