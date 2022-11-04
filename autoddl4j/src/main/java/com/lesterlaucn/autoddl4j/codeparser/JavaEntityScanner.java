@@ -1,12 +1,12 @@
-package com.lesterlaucn.autoddl4j.codparser;
+package com.lesterlaucn.autoddl4j.codeparser;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.lesterlaucn.autoddl4j.TableDef;
-import com.lesterlaucn.autoddl4j.codparser.common.ClasspathPackageScanner;
-import com.lesterlaucn.autoddl4j.codparser.common.ColumnParser;
-import com.lesterlaucn.autoddl4j.codparser.common.TableParser;
+import com.lesterlaucn.autoddl4j.codeparser.java.ClasspathPackageScanner;
+import com.lesterlaucn.autoddl4j.codeparser.java.ColumnParser;
+import com.lesterlaucn.autoddl4j.codeparser.java.TableParser;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.util.ConfigurationBuilder;
@@ -20,7 +20,7 @@ import java.util.*;
  */
 @Slf4j
 @NoArgsConstructor
-public class EntityScanner {
+public class JavaEntityScanner {
 
     private final Map<String, ClasspathPackageScanner> PACKAGE_SCANNER_MAP = Maps.newHashMap();
 
@@ -34,11 +34,11 @@ public class EntityScanner {
         }
     }
 
-    public EntityScanner(List<String> packageScans) {
+    public JavaEntityScanner(List<String> packageScans) {
         init(packageScans);
     }
 
-    public EntityScanner(Set<String> packageScans) {
+    public JavaEntityScanner(Set<String> packageScans) {
         init(Lists.newArrayList(packageScans));
     }
 
@@ -48,7 +48,7 @@ public class EntityScanner {
      * @param packageScans
      * @return
      */
-    public EntityScanner(String... packageScans) {
+    public JavaEntityScanner(String... packageScans) {
         init(Arrays.asList(packageScans));
     }
 

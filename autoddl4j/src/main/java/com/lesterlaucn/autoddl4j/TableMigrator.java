@@ -1,7 +1,7 @@
 package com.lesterlaucn.autoddl4j;
 
 
-import com.lesterlaucn.autoddl4j.codparser.EntityScanner;
+import com.lesterlaucn.autoddl4j.codeparser.JavaEntityScanner;
 import com.lesterlaucn.autoddl4j.datasource.DatabaseMeta;
 import com.lesterlaucn.autoddl4j.datasource.JdbcBound;
 import com.lesterlaucn.autoddl4j.util.TableDefDiff;
@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by liuyuancheng on 2022/10/27  <br/>
@@ -40,7 +39,7 @@ public class TableMigrator {
      */
     public List<String> toDdlList() {
         TableDef tableDefInDataBase = DatabaseMeta.create(jdbcBound).toTableDef();
-        TableDef tableDefInCode = new EntityScanner(jdbcBound.getPackageScan()).getTableDef();
+        TableDef tableDefInCode = new JavaEntityScanner(jdbcBound.getPackageScan()).getTableDef();
         return new TableDefDiff(tableDefInDataBase, tableDefInCode).toDdl();
     }
 

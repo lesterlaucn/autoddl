@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.codparser;
+package com.lesterlaucn.autoddl4j.codeparser;
 
 import com.lesterlaucn.autoddl4j.TableDef;
 import lombok.extern.slf4j.Slf4j;
@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("实体解析")
 @Slf4j
-class EntityScannerTest {
+class JavaEntityScannerTest {
 
-    private EntityScanner entityParser;
+    private JavaEntityScanner entityParser;
 
     @BeforeEach
     void setup() {
-        entityParser = new EntityScanner("com.lesterlaucn.autoddl4j.demo.entity");
+        entityParser = new JavaEntityScanner("com.lesterlaucn.autoddl4j.demo.entity");
     }
 
     @Test
