@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.codeparser.ddl;
+package com.lesterlaucn.autoddl4j.codescanner.ddl;
 
 import com.lesterlaucn.autoddl4j.TableDef;
 import com.lesterlaucn.autoddl4j.datasource.ddl.MySqlTableDdlParser;

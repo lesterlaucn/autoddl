@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.codeparser.java;
+package com.lesterlaucn.autoddl4j.codescanner.java;
 
 import com.lesterlaucn.autoddl4j.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;

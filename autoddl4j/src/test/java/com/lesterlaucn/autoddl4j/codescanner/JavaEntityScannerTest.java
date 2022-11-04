@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.codeparser;
+package com.lesterlaucn.autoddl4j.codescanner;
 
 import com.lesterlaucn.autoddl4j.TableDef;
 import lombok.extern.slf4j.Slf4j;

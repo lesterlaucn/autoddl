@@ -1,7 +1,7 @@
 package com.lesterlaucn.autoddl4j;
 
 
-import com.lesterlaucn.autoddl4j.codeparser.JavaEntityScanner;
+import com.lesterlaucn.autoddl4j.codescanner.JavaEntityScanner;
 import com.lesterlaucn.autoddl4j.datasource.DatabaseMeta;
 import com.lesterlaucn.autoddl4j.datasource.JdbcBound;
 import com.lesterlaucn.autoddl4j.util.TableDefDiff;
