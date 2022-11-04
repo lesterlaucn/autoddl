@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.entity.common;
+package com.lesterlaucn.autoddl4j.codparser.common;
 
 import com.lesterlaucn.autoddl4j.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;

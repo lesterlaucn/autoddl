@@ -1,6 +1,7 @@
 package com.lesterlaucn.autoddl4j.datasource;
 
 
+import com.lesterlaucn.autoddl4j.TableDef;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import com.lesterlaucn.autoddl4j.datasource.mysql.MySqlTableMeta;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +22,12 @@ public class DatabaseMeta {
     private DatabaseMeta() {
     }
 
-    public static DatabaseMeta create(DbType dbType, JdbcTemplate jdbcTemplate) {
+    public static DatabaseMeta create(JdbcBound jdbcBound) {
         final DatabaseMeta dataSourceMeta = new DatabaseMeta();
-        dataSourceMeta.dbType = dbType;
-        switch (dbType){
+        dataSourceMeta.dbType = jdbcBound.getDbType();
+        switch (jdbcBound.getDbType()){
             case MySQL:
-                dataSourceMeta.table = new MySqlTableMeta(jdbcTemplate);
+                dataSourceMeta.table = new MySqlTableMeta(jdbcBound.getJdbcTemplate());
                 break;
             case ClickHouse:
                 log.warn("ClickHouse is not supported yet.");
@@ -39,5 +40,9 @@ public class DatabaseMeta {
 
     public AbstractTableMeta table(){
         return table;
+    }
+
+    public TableDef toTableDef(){
+        return TableDef.create();
     }
 }

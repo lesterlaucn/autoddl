@@ -1,25 +1,22 @@
 package com.lesterlaucn.autoddl4j.datasource;
 
-import com.lesterlaucn.autoddl4j.TableMigrationSingleton;
+import com.lesterlaucn.autoddl4j.TableMigrator;
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
-import java.util.Objects;
 
 class DatabaseMetaTest {
 
     public static final String TEST_ENTITY = "com.lesterlaucn.autoddl4j.demo.entity";
 
-    private TableMigrationSingleton migrationExecutor;
+    private TableMigrator migrationExecutor;
 
     private DatabaseMeta dataSourceMeta;
 
     @BeforeEach
     void setup() {
-        migrationExecutor = TableMigrationSingleton.create();
 
         JdbcBound dataSourceBound = JdbcBound.builder()
                 .username("root")
@@ -29,10 +26,8 @@ class DatabaseMetaTest {
                 .dbType(DbType.MySQL)
                 .packageScan(new String[]{TEST_ENTITY})
                 .build();
-        migrationExecutor.register(dataSourceBound);
-        final JdbcTemplate jdbcTemplate = migrationExecutor.getJdbcTemplate(TEST_ENTITY);
-        Objects.requireNonNull(jdbcTemplate);
-        dataSourceMeta = DatabaseMeta.create(DbType.MySQL, jdbcTemplate);
+        migrationExecutor = new TableMigrator(dataSourceBound);
+        dataSourceMeta = DatabaseMeta.create(dataSourceBound);
     }
 
     @Test

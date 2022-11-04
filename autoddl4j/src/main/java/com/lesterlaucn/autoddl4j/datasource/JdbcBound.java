@@ -1,8 +1,14 @@
 package com.lesterlaucn.autoddl4j.datasource;
 
 import com.lesterlaucn.autoddl4j.datasource.definition.DbType;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NonNull;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.persistence.Transient;
+import java.util.Objects;
 
 /**
  * Created by liuyuancheng on 2022/10/27  <br/>
@@ -12,6 +18,9 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Builder
 @Getter
 public class JdbcBound {
+
+    @Transient
+    private volatile JdbcTemplate jdbcTemplate;
 
     private DbType dbType;
 
@@ -30,7 +39,16 @@ public class JdbcBound {
     @NonNull
     private String driverClassName;
 
-    public DriverManagerDataSource getDataSource(){
+    public synchronized JdbcTemplate getJdbcTemplate() {
+        if (Objects.isNull(jdbcTemplate)) {
+            synchronized (JdbcBound.class) {
+                jdbcTemplate = new JdbcTemplate(getDataSource());
+            }
+        }
+        return jdbcTemplate;
+    }
+
+    private DriverManagerDataSource getDataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername(username);
         dataSource.setUrl(url.trim());

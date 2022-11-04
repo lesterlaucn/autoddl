@@ -1,4 +1,4 @@
-package com.lesterlaucn.autoddl4j.entity.common;
+package com.lesterlaucn.autoddl4j.codparser.common;
 
 import com.google.common.base.CaseFormat;
 import com.lesterlaucn.autoddl4j.TableDef;

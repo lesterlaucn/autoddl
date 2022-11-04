@@ -1,17 +1,17 @@
-package com.lesterlaucn.autoddl4j.entity;
+package com.lesterlaucn.autoddl4j.codparser;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.lesterlaucn.autoddl4j.TableDef;
-import com.lesterlaucn.autoddl4j.entity.common.ClasspathPackageScanner;
-import com.lesterlaucn.autoddl4j.entity.common.ColumnParser;
-import com.lesterlaucn.autoddl4j.entity.common.TableParser;
+import com.lesterlaucn.autoddl4j.codparser.common.ClasspathPackageScanner;
+import com.lesterlaucn.autoddl4j.codparser.common.ColumnParser;
+import com.lesterlaucn.autoddl4j.codparser.common.TableParser;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.util.ConfigurationBuilder;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by liuyuancheng on 2022/10/25  <br/>
@@ -19,22 +19,37 @@ import java.util.Set;
  * @author liuyuancheng
  */
 @Slf4j
-public class EntityParser {
+@NoArgsConstructor
+public class EntityScanner {
 
-    private static final Map<String, ClasspathPackageScanner> PACKAGE_SCANNER_MAP = Maps.newHashMap();
+    private final Map<String, ClasspathPackageScanner> PACKAGE_SCANNER_MAP = Maps.newHashMap();
+
+    private void init(List<String> packageScans) {
+        ClasspathPackageScanner packageScanner = null;
+        for (String packageScan : packageScans) {
+            if (!PACKAGE_SCANNER_MAP.containsKey(packageScan)) {
+                packageScanner = new ClasspathPackageScanner(packageScan);
+                PACKAGE_SCANNER_MAP.put(packageScan, packageScanner);
+            }
+        }
+    }
+
+    public EntityScanner(List<String> packageScans) {
+        init(packageScans);
+    }
+
+    public EntityScanner(Set<String> packageScans) {
+        init(Lists.newArrayList(packageScans));
+    }
 
     /**
      * 获取对应包内的Class
      *
-     * @param packageName
+     * @param packageScans
      * @return
      */
-    public void packageRegister(String packageName) {
-        ClasspathPackageScanner packageScanner = null;
-        if (!PACKAGE_SCANNER_MAP.containsKey(packageName)) {
-            packageScanner = new ClasspathPackageScanner(packageName);
-            PACKAGE_SCANNER_MAP.put(packageName, packageScanner);
-        }
+    public EntityScanner(String... packageScans) {
+        init(Arrays.asList(packageScans));
     }
 
     private Set<String> getAllClasses() {
@@ -51,7 +66,7 @@ public class EntityParser {
      *
      * @return 带有@Table注解的所有类型
      */
-    public Set<Class<?>> getTableTypes() {
+    private List<Class<?>> getEntityTypes() {
         final Set<String> allClasses = getAllClasses();
         Set<Class<?>> returning = Sets.newConcurrentHashSet();
         try {
@@ -67,7 +82,7 @@ public class EntityParser {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return returning;
+        return Lists.newArrayList(returning);
     }
 
     /**
@@ -77,11 +92,23 @@ public class EntityParser {
      * @param entities 需要解析的
      * @return
      */
-    public TableDef parserTableEntity(TableDef result, Class<?>... entities) {
+    private TableDef parserTableEntity(TableDef result, List<Class<?>> entities) {
         for (Class<?> entity : entities) {
             TableParser.parse(entity, result.getTable(TableParser.readTableName(entity), entity.getCanonicalName()));
             ColumnParser.parse(entity, result.getTable(TableParser.readTableName(entity), entity.getCanonicalName()));
         }
         return result;
+    }
+
+    /**
+     * 读取代码中Entity的定义
+     *
+     * @return
+     */
+    public TableDef getTableDef() {
+        TableDef tableDef = TableDef.create();
+        final List<Class<?>> entityTypes = getEntityTypes();
+        parserTableEntity(tableDef, entityTypes);
+        return tableDef;
     }
 }
