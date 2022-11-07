@@ -8,5 +8,6 @@ package tech.mozhou.autoddl4j.target.definition;
 
 public enum DbType {
     ClickHouse,
-    MySQL
+    MySQL,
+    PostgreSQL
 }
