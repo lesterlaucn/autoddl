@@ -1,4 +1,4 @@
-package tech.mozhou.autoddl4j.target.ddlparser;
+package tech.mozhou.autoddl4j.target.ddlparser.impl;
 
 
 import com.google.common.collect.Lists;

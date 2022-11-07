@@ -1,11 +1,11 @@
-package tech.mozhou.autoddl4j.target.definition.mysql;
+package tech.mozhou.autoddl4j.target.ddlparser.impl;
 
-import tech.mozhou.autoddl4j.target.definition.AbstractTableMeta;
 import tech.mozhou.autoddl4j.exception.Autoddl4jParserException;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
+import tech.mozhou.autoddl4j.target.ddlparser.AbstractTableMeta;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;

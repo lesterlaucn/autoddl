@@ -1,4 +1,4 @@
-package tech.mozhou.autoddl4j.target.definition;
+package tech.mozhou.autoddl4j.target.ddlparser;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

@@ -2,10 +2,9 @@ package tech.mozhou.autoddl4j.target.ddlparser;
 
 import lombok.extern.slf4j.Slf4j;
 import tech.mozhou.autoddl4j.TableDef;
-import tech.mozhou.autoddl4j.target.definition.AbstractTableMeta;
 import tech.mozhou.autoddl4j.target.JdbcBound;
-import tech.mozhou.autoddl4j.target.definition.mysql.MySqlTableMeta;
 import tech.mozhou.autoddl4j.exception.Autoddl4jParserException;
+import tech.mozhou.autoddl4j.target.ddlparser.impl.MySqlTableMeta;
 
 /**
  * Created by liuyuancheng on 2022/10/25  <br/>
