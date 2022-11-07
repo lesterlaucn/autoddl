@@ -1,9 +1,9 @@
 package tech.mozhou.autoddl4j;
 
 
-import tech.mozhou.autoddl4j.codescanner.JavaEntityScanner;
-import tech.mozhou.autoddl4j.datasource.DatabaseMeta;
-import tech.mozhou.autoddl4j.datasource.JdbcBound;
+import tech.mozhou.autoddl4j.codeparser.JavaEntityScanner;
+import tech.mozhou.autoddl4j.ddlparser.DatabaseMeta;
+import tech.mozhou.autoddl4j.ddlparser.JdbcBound;
 import tech.mozhou.autoddl4j.util.TableDefDiff;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

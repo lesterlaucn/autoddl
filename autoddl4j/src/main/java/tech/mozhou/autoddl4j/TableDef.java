@@ -1,13 +1,13 @@
 package tech.mozhou.autoddl4j;
 
 import com.google.common.collect.Maps;
-import tech.mozhou.autoddl4j.datasource.definition.*;
+import tech.mozhou.autoddl4j.ddlparser.ddlparser.definition.*;
+import tech.mozhou.autoddl4j.ddlparser.definition.*;
 import tech.mozhou.autoddl4j.util.JsonUtil;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.StringUtils;
-import tech.mozhou.autoddl4j.datasource.definition.*;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;

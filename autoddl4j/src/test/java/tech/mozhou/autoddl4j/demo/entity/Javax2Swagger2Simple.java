@@ -1,6 +1,6 @@
 package tech.mozhou.autoddl4j.demo.entity;
 
-import tech.mozhou.autoddl4j.annotations.TableExtend;
+import tech.mozhou.autoddl4j.codeparser.java.annotations.TableExtend;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
