@@ -2,7 +2,7 @@ package tech.mozhou.autoddl4j.source.java.annotations;
 
 import tech.mozhou.autoddl4j.target.definition.CharacterSet;
 import tech.mozhou.autoddl4j.target.definition.Collation;
-import tech.mozhou.autoddl4j.target.definition.DbType;
+import tech.mozhou.autoddl4j.target.definition.type.DbType;
 import tech.mozhou.autoddl4j.target.definition.TableEngine;
 
 import java.lang.annotation.Retention;

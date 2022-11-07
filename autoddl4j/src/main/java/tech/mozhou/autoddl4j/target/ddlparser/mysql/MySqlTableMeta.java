@@ -1,4 +1,4 @@
-package tech.mozhou.autoddl4j.target.ddlparser.impl;
+package tech.mozhou.autoddl4j.target.ddlparser.mysql;
 
 import tech.mozhou.autoddl4j.exception.Autoddl4jParserException;
 import lombok.NonNull;

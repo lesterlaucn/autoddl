@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import tech.mozhou.autoddl4j.TableDef;
 import tech.mozhou.autoddl4j.target.JdbcBound;
 import tech.mozhou.autoddl4j.exception.Autoddl4jParserException;
-import tech.mozhou.autoddl4j.target.ddlparser.impl.MySqlTableMeta;
+import tech.mozhou.autoddl4j.target.ddlparser.mysql.MySqlTableMeta;
 
 /**
  * Created by liuyuancheng on 2022/10/25  <br/>

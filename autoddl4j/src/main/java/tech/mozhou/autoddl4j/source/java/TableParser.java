@@ -5,7 +5,7 @@ import tech.mozhou.autoddl4j.TableDef;
 import tech.mozhou.autoddl4j.source.java.annotations.TableExtend;
 import tech.mozhou.autoddl4j.target.definition.CharacterSet;
 import tech.mozhou.autoddl4j.target.definition.Collation;
-import tech.mozhou.autoddl4j.target.definition.DbType;
+import tech.mozhou.autoddl4j.target.definition.type.DbType;
 import tech.mozhou.autoddl4j.target.definition.TableEngine;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

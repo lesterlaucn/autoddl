@@ -1,6 +1,6 @@
 package tech.mozhou.autoddl4j.target;
 
-import tech.mozhou.autoddl4j.target.definition.DbType;
+import tech.mozhou.autoddl4j.target.definition.type.DbType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;

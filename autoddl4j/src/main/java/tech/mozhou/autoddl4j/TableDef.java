@@ -2,6 +2,7 @@ package tech.mozhou.autoddl4j;
 
 import com.google.common.collect.Maps;
 import tech.mozhou.autoddl4j.target.definition.*;
+import tech.mozhou.autoddl4j.target.definition.type.DbType;
 import tech.mozhou.autoddl4j.util.JsonUtil;
 import lombok.Data;
 import lombok.NonNull;
