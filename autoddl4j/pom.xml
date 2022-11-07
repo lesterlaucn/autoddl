@@ -5,7 +5,7 @@
 
     <parent>
         <artifactId>autoddl4j-parent</artifactId>
-        <groupId>com.lesterlaucn</groupId>
+        <groupId>tech.mozhou</groupId>
         <version>1.0.0.RELEASE</version>
         <relativePath>../pom.xml</relativePath>
     </parent>

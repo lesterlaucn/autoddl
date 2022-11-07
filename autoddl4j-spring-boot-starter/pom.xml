@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>autoddl4j-parent</artifactId>
-        <groupId>com.lesterlaucn</groupId>
+        <groupId>tech.mozhou</groupId>
         <version>1.0.0.RELEASE</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -36,7 +36,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.lesterlaucn</groupId>
+            <groupId>tech.mozhou</groupId>
             <artifactId>autoddl4j</artifactId>
             <version>1.0.0.RELEASE</version>
         </dependency>

@@ -8,7 +8,7 @@
         <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.lesterlaucn.autoddl4j</groupId>
+    <groupId>tech.mozhou.autoddl4j</groupId>
     <artifactId>mybatis_plus_example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mybatis.plus</name>
