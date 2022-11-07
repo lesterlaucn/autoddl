@@ -1,7 +1,7 @@
 package tech.mozhou.autoddl4j;
 
-import tech.mozhou.autoddl4j.ddlparser.JdbcBound;
-import tech.mozhou.autoddl4j.ddlparser.definition.DbType;
+import tech.mozhou.autoddl4j.target.JdbcBound;
+import tech.mozhou.autoddl4j.target.definition.DbType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,12 +1,12 @@
-package tech.mozhou.autoddl4j.codeparser.java;
+package tech.mozhou.autoddl4j.source.java;
 
 import com.google.common.base.CaseFormat;
 import tech.mozhou.autoddl4j.TableDef;
-import tech.mozhou.autoddl4j.codeparser.java.annotations.TableExtend;
-import tech.mozhou.autoddl4j.ddlparser.definition.CharacterSet;
-import tech.mozhou.autoddl4j.ddlparser.definition.Collation;
-import tech.mozhou.autoddl4j.ddlparser.definition.DbType;
-import tech.mozhou.autoddl4j.ddlparser.definition.TableEngine;
+import tech.mozhou.autoddl4j.source.java.annotations.TableExtend;
+import tech.mozhou.autoddl4j.target.definition.CharacterSet;
+import tech.mozhou.autoddl4j.target.definition.Collation;
+import tech.mozhou.autoddl4j.target.definition.DbType;
+import tech.mozhou.autoddl4j.target.definition.TableEngine;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

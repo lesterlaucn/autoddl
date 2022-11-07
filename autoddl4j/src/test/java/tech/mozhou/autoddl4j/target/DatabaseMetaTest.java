@@ -1,7 +1,8 @@
-package tech.mozhou.autoddl4j.ddlparser;
+package tech.mozhou.autoddl4j.target;
 
 import tech.mozhou.autoddl4j.TableMigrator;
-import tech.mozhou.autoddl4j.ddlparser.definition.DbType;
+import tech.mozhou.autoddl4j.target.ddlparser.DatabaseMeta;
+import tech.mozhou.autoddl4j.target.definition.DbType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

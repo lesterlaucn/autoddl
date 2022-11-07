@@ -1,9 +1,9 @@
 package tech.mozhou.autoddl4j;
 
 
-import tech.mozhou.autoddl4j.codeparser.JavaEntityScanner;
-import tech.mozhou.autoddl4j.ddlparser.DatabaseMeta;
-import tech.mozhou.autoddl4j.ddlparser.JdbcBound;
+import tech.mozhou.autoddl4j.source.JavaSource;
+import tech.mozhou.autoddl4j.target.ddlparser.DatabaseMeta;
+import tech.mozhou.autoddl4j.target.JdbcBound;
 import tech.mozhou.autoddl4j.util.TableDefDiff;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +39,7 @@ public class TableMigrator {
      */
     public List<String> toDdlList() {
         TableDef tableDefInDataBase = DatabaseMeta.create(jdbcBound).toTableDef();
-        TableDef tableDefInCode = new JavaEntityScanner(jdbcBound.getPackageScan()).getTableDef();
+        TableDef tableDefInCode = new JavaSource(jdbcBound.getPackageScan()).getTableDef();
         return new TableDefDiff(tableDefInDataBase, tableDefInCode).toDdl();
     }
 

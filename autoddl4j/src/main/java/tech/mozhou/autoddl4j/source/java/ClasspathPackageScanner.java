@@ -1,4 +1,4 @@
-package tech.mozhou.autoddl4j.codeparser.java;
+package tech.mozhou.autoddl4j.source.java;
 
 import tech.mozhou.autoddl4j.exception.Autoddl4jParserException;
 import tech.mozhou.autoddl4j.util.StringUtil;

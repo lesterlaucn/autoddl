@@ -1,9 +1,9 @@
-package tech.mozhou.autoddl4j.codeparser.java.annotations;
+package tech.mozhou.autoddl4j.source.java.annotations;
 
-import tech.mozhou.autoddl4j.ddlparser.definition.CharacterSet;
-import tech.mozhou.autoddl4j.ddlparser.definition.Collation;
-import tech.mozhou.autoddl4j.ddlparser.definition.DbType;
-import tech.mozhou.autoddl4j.ddlparser.definition.TableEngine;
+import tech.mozhou.autoddl4j.target.definition.CharacterSet;
+import tech.mozhou.autoddl4j.target.definition.Collation;
+import tech.mozhou.autoddl4j.target.definition.DbType;
+import tech.mozhou.autoddl4j.target.definition.TableEngine;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

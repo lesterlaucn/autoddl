@@ -1,6 +1,6 @@
-package tech.mozhou.autoddl4j.ddlparser.definition.mysql;
+package tech.mozhou.autoddl4j.target.definition.mysql;
 
-import tech.mozhou.autoddl4j.ddlparser.AbstractTableMeta;
+import tech.mozhou.autoddl4j.target.definition.AbstractTableMeta;
 import tech.mozhou.autoddl4j.exception.Autoddl4jParserException;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

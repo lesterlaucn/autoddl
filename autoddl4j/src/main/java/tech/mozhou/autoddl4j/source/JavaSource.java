@@ -1,12 +1,12 @@
-package tech.mozhou.autoddl4j.codeparser;
+package tech.mozhou.autoddl4j.source;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import tech.mozhou.autoddl4j.TableDef;
-import tech.mozhou.autoddl4j.codeparser.java.ClasspathPackageScanner;
-import tech.mozhou.autoddl4j.codeparser.java.ColumnParser;
-import tech.mozhou.autoddl4j.codeparser.java.TableParser;
+import tech.mozhou.autoddl4j.source.java.ClasspathPackageScanner;
+import tech.mozhou.autoddl4j.source.java.ColumnParser;
+import tech.mozhou.autoddl4j.source.java.TableParser;
 import tech.mozhou.autoddl4j.exception.Autoddl4jParserException;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.*;
  */
 @Slf4j
 @NoArgsConstructor
-public class JavaEntityScanner {
+public class JavaSource {
 
     private final Map<String, ClasspathPackageScanner> PACKAGE_SCANNER_MAP = Maps.newHashMap();
 
@@ -35,11 +35,11 @@ public class JavaEntityScanner {
         }
     }
 
-    public JavaEntityScanner(List<String> packageScans) {
+    public JavaSource(List<String> packageScans) {
         init(packageScans);
     }
 
-    public JavaEntityScanner(Set<String> packageScans) {
+    public JavaSource(Set<String> packageScans) {
         init(Lists.newArrayList(packageScans));
     }
 
@@ -49,7 +49,7 @@ public class JavaEntityScanner {
      * @param packageScans
      * @return
      */
-    public JavaEntityScanner(String... packageScans) {
+    public JavaSource(String... packageScans) {
         init(Arrays.asList(packageScans));
     }
 

@@ -1,8 +1,7 @@
 package tech.mozhou.autoddl4j;
 
 import com.google.common.collect.Maps;
-import tech.mozhou.autoddl4j.ddlparser.ddlparser.definition.*;
-import tech.mozhou.autoddl4j.ddlparser.definition.*;
+import tech.mozhou.autoddl4j.target.definition.*;
 import tech.mozhou.autoddl4j.util.JsonUtil;
 import lombok.Data;
 import lombok.NonNull;

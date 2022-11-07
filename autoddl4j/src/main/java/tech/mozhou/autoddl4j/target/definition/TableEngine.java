@@ -1,4 +1,4 @@
-package tech.mozhou.autoddl4j.ddlparser.definition;
+package tech.mozhou.autoddl4j.target.definition;
 
 import lombok.Getter;
 

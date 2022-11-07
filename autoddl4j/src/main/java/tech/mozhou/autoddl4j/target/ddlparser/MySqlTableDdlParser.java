@@ -1,12 +1,13 @@
-package tech.mozhou.autoddl4j.ddlparser;
+package tech.mozhou.autoddl4j.target.ddlparser;
 
 
 import com.google.common.collect.Lists;
 import tech.mozhou.autoddl4j.TableDef;
-import tech.mozhou.autoddl4j.ddlparser.definition.CharacterSet;
-import tech.mozhou.autoddl4j.ddlparser.definition.DbType;
-import tech.mozhou.autoddl4j.ddlparser.definition.TableEngine;
-import tech.mozhou.autoddl4j.ddlparser.definition.type.ColumnType2Java;
+import tech.mozhou.autoddl4j.target.ddlparser.ITableDdlParser;
+import tech.mozhou.autoddl4j.target.definition.CharacterSet;
+import tech.mozhou.autoddl4j.target.definition.DbType;
+import tech.mozhou.autoddl4j.target.definition.TableEngine;
+import tech.mozhou.autoddl4j.target.definition.type.ColumnType2Java;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 

@@ -1,6 +1,6 @@
-package tech.mozhou.autoddl4j.ddlparser;
+package tech.mozhou.autoddl4j.target;
 
-import tech.mozhou.autoddl4j.ddlparser.definition.DbType;
+import tech.mozhou.autoddl4j.target.definition.DbType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;

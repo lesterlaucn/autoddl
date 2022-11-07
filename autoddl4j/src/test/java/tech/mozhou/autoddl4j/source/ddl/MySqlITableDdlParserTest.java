@@ -1,7 +1,7 @@
-package tech.mozhou.autoddl4j.codeparser.ddl;
+package tech.mozhou.autoddl4j.source.ddl;
 
 import tech.mozhou.autoddl4j.TableDef;
-import tech.mozhou.autoddl4j.ddlparser.MySqlTableDdlParser;
+import tech.mozhou.autoddl4j.target.ddlparser.MySqlTableDdlParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package tech.mozhou.autoddl4j.ddlparser;
+package tech.mozhou.autoddl4j.target.ddlparser;
 
 import tech.mozhou.autoddl4j.TableDef;
 

@@ -1,4 +1,4 @@
-package tech.mozhou.autoddl4j.codeparser.java;
+package tech.mozhou.autoddl4j.source.java;
 
 
 import com.google.common.base.CaseFormat;
