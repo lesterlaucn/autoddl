@@ -52,7 +52,7 @@ public class ClasspathPackageScanner {
      * @throws IOException
      */
     public List<String> getFullyQualifiedClassNameList() {
-        log.info("开始扫描包{}下的所有类", basePackage);
+        log.debug("开始扫描包{}下的所有类", basePackage);
         try {
             return doScan(basePackage, new ArrayList<>());
         } catch (IOException e) {
