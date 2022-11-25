@@ -1,10 +1,10 @@
 package tech.mozhou.autoddl4j.target.ddlparser.mysql;
 
-import tech.mozhou.autoddl4j.exception.Autoddl4jParserException;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
+import tech.mozhou.autoddl4j.exception.Autoddl4jParserException;
 import tech.mozhou.autoddl4j.target.ddlparser.AbstractTableMeta;
 
 import javax.sql.DataSource;
@@ -30,21 +30,25 @@ public class MySqlTableMeta extends AbstractTableMeta {
 
     @Override
     public Boolean isTableExists(String tableName) {
-        return null;
+        final List<Map<String, Object>> tables = getJdbcTemplate()
+                .queryForList("show tables like " + StringUtils.wrapIfMissing(tableName, "'"));
+        boolean exists = !tables.isEmpty();
+        log.debug("table {} {} exists.", tableName, exists ? "is" : "is not");
+        return exists;
     }
 
     @Override
     public List<String> showTableNames(String databaseName) {
-        if (StringUtils.isEmpty(databaseName)){
+        if (StringUtils.isEmpty(databaseName)) {
             try {
                 final DataSource dataSource = getJdbcTemplate().getDataSource();
                 Objects.requireNonNull(dataSource);
                 final String url = dataSource.getConnection().getMetaData().getURL();
                 Pattern pattern = Pattern.compile("/([a-zA-Z0-9_-]*?)\\?");
                 Matcher matcher = pattern.matcher(url);
-                if (matcher.find()){
+                if (matcher.find()) {
                     databaseName = matcher.toMatchResult().group(1);
-                }else{
+                } else {
                     throw new Autoddl4jParserException("error");
                 }
             } catch (SQLException e) {
@@ -63,11 +67,14 @@ public class MySqlTableMeta extends AbstractTableMeta {
      */
     @Override
     public String showCreateTable(@NonNull String tableName) {
+        String createTable = "";
         if (this.isTableExists(tableName)) {
-            getJdbcTemplate().queryForMap("show create table " + StringUtils.wrapIfMissing(tableName, '`'));
+            final Map<String, Object> stringObjectMap = getJdbcTemplate().queryForMap("show create table " + StringUtils.wrapIfMissing(tableName, '`'));
+            createTable = stringObjectMap.get("Create Table").toString();
+        }else{
+            log.warn("Showing table {} failed, in case of dose not exists.", tableName);
         }
-        log.warn("Showing table {} failed, in case of dose not exists.", tableName);
-        return null;
+        return createTable;
     }
 
 

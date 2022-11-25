@@ -33,7 +33,8 @@ class DatabaseMetaTest {
 
     @Test
     void create() {
-        dataSourceMeta.table().showCreateTable("autoddl4j_test1");
+        final String showCreateTable = dataSourceMeta.table().showCreateTable("autoddl4j_test1");
+        System.out.println(showCreateTable);
     }
 
     @Test
