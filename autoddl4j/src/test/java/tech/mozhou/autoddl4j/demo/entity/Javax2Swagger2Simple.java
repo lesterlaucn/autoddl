@@ -23,13 +23,14 @@ public class Javax2Swagger2Simple {
     private String name;
 
     @Schema(description = "创建时间")
+    @Column(nullable = false)
     private Date createTime;
 
     @Column
     private Boolean isTrue;
 
     @Column
-    private int age;
+    private Integer age;
 
     @Column
     private BigDecimal price;

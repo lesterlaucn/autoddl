@@ -1,18 +1,25 @@
 package tech.mozhou.autoddl4j;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import tech.mozhou.autoddl4j.target.definition.*;
-import tech.mozhou.autoddl4j.target.definition.type.DbType;
-import tech.mozhou.autoddl4j.util.JsonUtil;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.StringUtils;
+import tech.mozhou.autoddl4j.target.definition.CharacterSet;
+import tech.mozhou.autoddl4j.target.definition.Collation;
+import tech.mozhou.autoddl4j.target.definition.IndexMethod;
+import tech.mozhou.autoddl4j.target.definition.TableEngine;
+import tech.mozhou.autoddl4j.target.definition.type.DbType;
+import tech.mozhou.autoddl4j.target.definition.type.JavaType2Column;
+import tech.mozhou.autoddl4j.util.JsonUtil;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by liuyuancheng on 2022/10/25  <br/>
@@ -34,6 +41,10 @@ public class TableDef implements Serializable {
 
     public Table getTable(@NonNull String tableName) {
         return getTable(tableName, null);
+    }
+
+    public List<String> getTableNames() {
+        return Lists.newArrayList(tables.keySet());
     }
 
     /**
@@ -91,9 +102,29 @@ public class TableDef implements Serializable {
 
         private TableEngine engine;
 
+        private List<Column> primaryColumns = Lists.newArrayList();
+
         public Table addColumn(Column columnDef) {
             this.columns.put(columnDef.getColumnName(), columnDef);
             return this;
+        }
+
+        public String toCreateDdl() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("\nCREATE TABLE `").append(this.tableName).append("` (\n");
+            for (Map.Entry<String, Column> column : columns.entrySet()) {
+                sb.append(' ').append(column.getValue().toCreateDdl());
+                if (column.getValue().isPrimaryKey){
+                    primaryColumns.add(column.getValue());
+                }
+            }
+            if (!primaryColumns.isEmpty()){
+                final String key = primaryColumns.stream().map(Column::getColumnName).collect(Collectors.joining(","));
+                sb.append(" ").append("PRIMARY KEY (").append(key).append(")\n");
+            }
+            sb.append(") ENGINE=").append(this.engine.getName());
+            sb.append(" DEFAULT CHARSET=").append(this.characterSet.getName());
+            return sb.toString();
         }
     }
 
@@ -138,6 +169,21 @@ public class TableDef implements Serializable {
          */
         private Integer decimalScale;
 
+        public String toCreateDdl() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(columnName);
+            final JavaType2Column type2Column = JavaType2Column.getType(this.javaType);
+            Objects.requireNonNull(type2Column,this.javaType.getName());
+            sb.append(" ").append(type2Column.toDefinition()).append(" ");
+            if (!isNullable){
+                sb.append("NOT NULL ");
+            }
+            if (StringUtils.isNotBlank(this.comment)){
+                sb.append("COMMENT ").append(StringUtils.wrap(comment,'"'));
+            }
+            sb.append(",").append("\n");
+            return sb.toString();
+        }
     }
 
     /**

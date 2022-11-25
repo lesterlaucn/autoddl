@@ -1,10 +1,10 @@
 package tech.mozhou.autoddl4j;
 
 import lombok.extern.slf4j.Slf4j;
-import tech.mozhou.autoddl4j.target.JdbcBound;
-import tech.mozhou.autoddl4j.target.definition.type.DbType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tech.mozhou.autoddl4j.target.JdbcBound;
+import tech.mozhou.autoddl4j.target.definition.type.DbType;
 
 import java.util.List;
 
@@ -31,8 +31,7 @@ class TableMigratorTest {
 
     @Test
     void toDdlList() {
-        final List<String> strings = tableMigrator.toDdlList();
-        log.debug("toDdlList {}",strings);
+        tableMigrator.toDdlList();
     }
 
     @Test
